@@ -11,5 +11,3 @@ sqlConn = mysql.connector.connect(
     port=os.getenv("PORT_DB"),
     database=os.getenv("DATABASE_DB")
 )
-
-cursor = sqlConn.cursor()   
