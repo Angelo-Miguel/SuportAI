@@ -1,5 +1,5 @@
 from main import app
-from flask import render_template, request
+from flask import render_template, request, redirect, flash, session
 from static.python.connection_db import sqlConn
 import hashlib #md5 cript for password
 
@@ -23,7 +23,7 @@ def cadastrar():
     if password:
         hashed_password = hashlib.md5(password.encode()).hexdigest()
     try:
-        cursor.execute("INSERT INTO users (name, email, password) VALUES (%s, %s, %s)", 
+        cursor.execute('INSERT INTO users (name, email, password) VALUES (%s, %s, %s)', 
                        (nome, email, hashed_password))
         sqlConn.commit()
         return home()
@@ -39,16 +39,23 @@ def login():
     if password:
         hashed_password = hashlib.md5(password.encode()).hexdigest()
     try:
-        cursor.execute('SELECT name, id_user FROM users WHERE email = %s AND password = %s', 
+        cursor.execute('SELECT * FROM users WHERE email = %s AND password = %s', 
                        (email, hashed_password))
+        
         results = cursor.fetchone()
-
         if cursor.rowcount == 1 and results is not None:
-            return user(results['name'], results['id_user']) # type: ignore # BUG: is not a dict
+            session['user'] = results
+            return user() # type: ignore # FIXME: dict bug
         else:
-            return f"Login inválido"
+            flash('Usuário ou senha incorretos!', 'danger')  # Salva a mensagem temporariamente
+            return redirect('/')  # Redireciona para a tela de login
     except Exception as e:
-        return f"Erro ao executar o Login: {str(e)}" # FIXME: Fix this later 
+        return f'Erro ao executar o Login: {str(e)}' # FIXME: return later 
     
-def user(username, id_user):
-    return render_template('user.html', username=username, id_user=id_user)
+def user():
+    return render_template('user.html')
+
+@app .route('/logout')
+def logout():
+    session.pop('user', None)
+    return redirect('/')

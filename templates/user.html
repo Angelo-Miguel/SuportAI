@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{username}}</title>
+    <title>{{session['user'].name}}</title>
 </head>
 <body>
-    <p>Pagina de {{username}}, {{id_user}}</p>
+    <p>Pagina de {{session['user'].name}}, {{session['user'].id_user}}</p>
+
+    <a href="\logout">Sair</a>
 </body>
 </html>
