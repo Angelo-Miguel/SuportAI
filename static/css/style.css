@@ -1,0 +1,34 @@
+body{
+  display: flex;
+  flex-direction: column;
+
+  width: 100vw;
+  height: 100vh;
+
+  background-image: url("../img/PIM_Background.jpg");
+  background-size: cover;
+  user-select: none;
+}
+
+.background {
+  background-image: url("../img/PIM_Background.jpg");
+  background-size: cover;
+
+  height: 100vh;
+  width: 100vw;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.opacity {
+  opacity: 0.4;
+}
+
+.button {
+  cursor: pointer;
+  background-color: #3A00AD !important;
+  color: #FFF !important;
+  border-color: #3A00AD !important;
+}

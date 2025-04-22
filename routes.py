@@ -39,7 +39,7 @@ def login():
     if password:
         hashed_password = hashlib.md5(password.encode()).hexdigest()
     try:
-        cursor.execute('SELECT * FROM users WHERE email = %s AND password = %s', 
+        cursor.execute('SELECT * FROM users WHERE email = %s and password = %s', 
                        (email, hashed_password))
         
         results = cursor.fetchone()

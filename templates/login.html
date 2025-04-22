@@ -1,48 +1,81 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="PT-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
-    <style>
-        body{
-            background-image: url("../static/img/PIM_background.jpg");
-            background-size: cover;
-            background-repeat: no-repeat;;
-        }
+    <link
+      rel="shortcut icon"
+      href="../static/img/icon.ico"
+      type="image/x-icon"
+    />
 
-        .login {
-            width: 300px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-    </style>
-</head>
+    <link rel="stylesheet" href="../static/css/reset.css" />
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <link rel="stylesheet" href="../static/css/login.css" />
 
-<body>
-    <div class="login">
-        <form action="/login" method="post">
-            <label for="email">E-mail</label>
-            <input type="email" id="email" name="email" required>
-            <br> <!-- DEBUG: remove BR -->
-            <label for="password">Senha</label>
-            <input type="password" id="password" name="password" required>
-            <br> <!-- DEBUG: remove BR -->
-            <button type="submit">Entrar</button>
-            <br> <!-- DEBUG: remove BR -->
-            <a href="/cadastro">cadastrar</a>
-        </form>
+    <script
+      src="https://kit.fontawesome.com/a50434ada2.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link href="../static/font/Algerian Regular.ttf" rel="font" />
+  </head>
+  <body class="background">
+    <div id="login">
+      <div id="menu-bar">
+        <img src="../static/img/logo.png" alt="Logo Do Site" id="logo" />
+      </div>
+      <div id="space"></div>
+      <form action="/login" method="post" id="form-login">
+        <div id="title">Entrar</div>
+        <label for="email">
+          <span class="label-text">E-mail:</span>
+        </label>
+        <div class="email">
+          <input type="text" id="email" name="email" placeholder="Digite seu Usuário" autocomplete="email"/>
+          <i class="fa-solid fa-envelope"></i>
+        </div>
+        <label for="password">
+          <span class="label-text">Senha:</span>
+        </label>
+        <div class="password">
+          <input type="password" id="password" name="password" placeholder="Digite sua Senha"/>
+          <i
+            id="eye-icon"
+            class="fa-solid fa-eye"
+            onclick="changePasswordVisibility()"
+          ></i>
+        </div>
+        <div>
+          <input type="submit" value="Entrar" class="button" />
+        </div>
         {% for category, message in get_flashed_messages(with_categories=True) %}
-            <div class="alert alert-{{ category }}">{{ message }}</div>
+            <div class="login-alert alert-{{ category }}">{{ message }}</div>
         {% endfor %}
+      </form>
+      <div id="brand">
+        <p>Suport AI</p>
+      </div>
     </div>
-</body>
+
+    <script>
+      const icon = document.getElementById("eye-icon");
+      const inputPassword = document.getElementById("password");
+
+      function changePasswordVisibility() {
+        icon.classList.toggle("fa-eye-slash");
+        icon.classList.toggle("fa-eye");
+
+        const isPassword = inputPassword.type === "password";
+        inputPassword.type = isPassword ? "text" : "password";
+      }
+    </script>
+  </body>
 </html>
