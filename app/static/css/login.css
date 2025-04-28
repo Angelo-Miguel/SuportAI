@@ -28,8 +28,8 @@
   & #brand,
   #space {
     position: relative;
-    min-width: 25vw;
-    min-height: 66vh;
+    min-width: 26vw;
+    min-height: 70vh;
     display: flex;
     align-items: end;
 
@@ -44,8 +44,8 @@
   & #form-login {
     border: 1px solid #3a00ad;
     background-color: #fff;
-    min-width: 28vw;
-    min-height: 66vh;
+    min-width: 26vw;
+    min-height: 70vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -56,6 +56,7 @@
       color: #3a00ad;
       font-weight: 900;
       font-size: 3.75rem;
+      margin-bottom: 20px;
     }
 
     & div.email,
@@ -119,6 +120,7 @@
     }
     & .button {
       padding: 0px;
+      margin-left: 0px !important;
       margin-top: 40px;
       width: 20vw;
       height: 6vh;
@@ -129,6 +131,11 @@
 
     & .login-alert{
       margin-top: 10px;
+      display: block;
+    }
+
+    & .jinja{
+      display: none;
     }
   }
 }
@@ -159,7 +166,6 @@
       height: auto;
 
       & #title {
-        font-size: 3rem;
         min-width: 40vw;
       }
 

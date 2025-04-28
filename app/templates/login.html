@@ -39,14 +39,25 @@
           <span class="label-text">E-mail:</span>
         </label>
         <div class="email">
-          <input type="text" id="email" name="email" placeholder="Digite seu Usuário" autocomplete="email"/>
+          <input
+            type="text"
+            id="email"
+            name="email"
+            placeholder="Digite seu Usuário"
+            autocomplete="email"
+          />
           <i class="fa-solid fa-envelope"></i>
         </div>
         <label for="password">
           <span class="label-text">Senha:</span>
         </label>
         <div class="password">
-          <input type="password" id="password" name="password" placeholder="Digite sua Senha"/>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Digite sua Senha"
+          />
           <i
             id="eye-icon"
             class="fa-solid fa-eye"
@@ -56,26 +67,20 @@
         <div>
           <input type="submit" value="Entrar" class="button" />
         </div>
-        {% for category, message in get_flashed_messages(with_categories=True) %}
-            <div class="login-alert alert-{{ category }}">{{ message }}</div>
-        {% endfor %}
+        <span class="jinja">
+          {% for category, message in get_flashed_messages(with_categories=True)
+          %}
+          <div class="login-alert alert-{{ category }}">{{ message }}</div>
+
+          {% endfor %}
+        </span>
       </form>
       <div id="brand">
         <p>Suport AI</p>
       </div>
     </div>
 
-    <script>
-      const icon = document.getElementById("eye-icon");
-      const inputPassword = document.getElementById("password");
-
-      function changePasswordVisibility() {
-        icon.classList.toggle("fa-eye-slash");
-        icon.classList.toggle("fa-eye");
-
-        const isPassword = inputPassword.type === "password";
-        inputPassword.type = isPassword ? "text" : "password";
-      }
-    </script>
+    <!-- Importação dos Scripts em Js-->
+   <script defer src="../static/js/scripts.js"></script>
   </body>
 </html>
