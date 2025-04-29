@@ -27,60 +27,58 @@
     />
     <link href="../static/font/Algerian Regular.ttf" rel="font" />
   </head>
-  <body class="background">
-    <div id="login">
-      <div id="menu-bar">
-        <img src="../static/img/logo.png" alt="Logo Do Site" id="logo" />
+  <body class="background" id="login">
+    <div id="menu-bar">
+      <img src="../static/img/logo.png" alt="Logo Do Site" id="logo" />
+    </div>
+    <div id="space"></div>
+    <form action="/login" method="post" id="form-login">
+      <div id="title">Entrar</div>
+      <label for="email">
+        <span class="label-text">E-mail:</span>
+      </label>
+      <div class="email">
+        <input
+          type="text"
+          id="email"
+          name="email"
+          placeholder="Digite seu Usuário"
+          autocomplete="email"
+        />
+        <i class="fa-solid fa-envelope"></i>
       </div>
-      <div id="space"></div>
-      <form action="/login" method="post" id="form-login">
-        <div id="title">Entrar</div>
-        <label for="email">
-          <span class="label-text">E-mail:</span>
-        </label>
-        <div class="email">
-          <input
-            type="text"
-            id="email"
-            name="email"
-            placeholder="Digite seu Usuário"
-            autocomplete="email"
-          />
-          <i class="fa-solid fa-envelope"></i>
-        </div>
-        <label for="password">
-          <span class="label-text">Senha:</span>
-        </label>
-        <div class="password">
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Digite sua Senha"
-          />
-          <i
-            id="eye-icon"
-            class="fa-solid fa-eye"
-            onclick="changePasswordVisibility()"
-          ></i>
-        </div>
-        <div>
-          <input type="submit" value="Entrar" class="button" />
-        </div>
-        <span class="jinja">
-          {% for category, message in get_flashed_messages(with_categories=True)
-          %}
-          <div class="login-alert alert-{{ category }}">{{ message }}</div>
+      <label for="password">
+        <span class="label-text">Senha:</span>
+      </label>
+      <div class="password">
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Digite sua Senha"
+        />
+        <i
+          id="eye-icon"
+          class="fa-solid fa-eye"
+          onclick="changePasswordVisibility()"
+        ></i>
+      </div>
+      <div>
+        <input type="submit" value="Entrar" class="button" />
+      </div>
+      <span class="jinja">
+        {% for category, message in get_flashed_messages(with_categories=True)
+        %}
+        <div class="login-alert alert-{{ category }}">{{ message }}</div>
 
-          {% endfor %}
-        </span>
-      </form>
-      <div id="brand">
-        <p>Suport AI</p>
-      </div>
+        {% endfor %}
+      </span>
+    </form>
+    <div id="brand">
+      <p>Suport AI</p>
     </div>
 
     <!-- Importação dos Scripts em Js-->
-   <script defer src="../static/js/scripts.js"></script>
+    <script defer src="../static/js/scripts.js"></script>
   </body>
 </html>

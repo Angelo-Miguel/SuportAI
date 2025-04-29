@@ -13,7 +13,7 @@ def create_app():
     app.template_folder='app/templates'
     app.static_folder='app/static'
     
-    # Configurações básicas
+    # Configurações secritas e de debug
     app.secret_key = os.getenv('SECRET_KEY', 'fallback_secret_key')# DEBUG: SECRET_KEY: Set in .env
     app.debug = os.getenv('DEBUG', 'False').lower() in ('true', '1', 't') # DEBUG: Set False in production .env
     

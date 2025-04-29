@@ -8,4 +8,4 @@ def dashboard():
     # Página do usuário
     if 'user' not in session:
         return redirect(url_for('auth.login_page'))
-    return render_template('user.html', user=session['user'])
+    return render_template('dashboard.html', user=session['user'])

@@ -1,0 +1,108 @@
+@font-face {
+  font-family: "Algerian";
+  src: url("../font/Algerian Regular.ttf") format("truetype");
+}
+
+#menu-bar {
+  position: relative;
+  top: 0px;
+  width: 100vw;
+  height: 11vh;
+
+  display: flex;
+  justify-content: space-between;
+
+  & #brand {
+    display: flex;
+    align-items: center;
+    & #logo {
+      margin: 3px 0px 0px 3px;
+      height: 10vh;
+      width: auto;
+    }
+
+    & #brand-name {
+      font-family: "Algerian", sans-serif;
+      font-size: 3em;
+      color: #3a00ad;
+      margin: auto 0px auto 10px;
+    }
+  }
+
+  & #user-actions {
+    position:relative;
+    width: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    & .new-request {
+      border-radius: 10px;
+      border-color: #3a00ad;
+
+      width: 13vw;
+      height: 6vh;
+    }
+
+    & #user-name {
+      font-size: 2em;
+      font-weight: 700 !important;
+      color: #000000;
+      margin: auto 40px auto 15px;
+    }
+  }
+}
+
+#conteudo {
+  height: 76%;
+  width: 90%;
+
+  margin: 2% auto 0 auto;
+
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+
+  text-align: center;
+
+  border-collapse: collapse;
+}
+
+th {
+  background-color: #6998e8;
+  width: auto;
+  height: 45px;
+}
+
+td,
+th {
+  height: 40px;
+  border: 1px solid black;
+}
+
+.aberto {
+  color: green;
+  font-weight: bold;
+}
+
+.em-progresso {
+  color: yellow;
+  font-weight: bold;
+}
+
+.fechado {
+  color: red;
+  font-weight: bold;
+}
+
+#acoes-usuario {
+  height: 100%;
+  width: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
