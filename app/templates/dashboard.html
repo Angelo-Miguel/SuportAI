@@ -9,7 +9,7 @@
       href="../static/img/icon.ico"
       type="image/x-icon"
     />
-    
+
     <title>{{session['user'].name}}</title>
 
     <link rel="stylesheet" href="../static/css/reset.css" />
@@ -30,140 +30,154 @@
         <img src="../static/img/logo.png" alt="Logo" id="logo" />
         <span id="brand-name">SUPORT AI</span>
       </span>
-
       <div id="user-actions">
-        <button class="new-request button">Novo Chamado</button>
-        <span id="user-name">{{session['user'].name}}</span>
+        <input type="submit" class="button new-request" value="Novo Chamado" />
+        <span id="user-name">{{session['user'].name}} </span>
       </div>
     </div>
-    
-    <div id="conteudo">
-      <table>
-        <thead>
-          <tr>
-            <th id="chamado">Nº Chamado</th>
-            <th>Título</th>
-            <th>Categoria</th>
-            <th>Status</th>
-            <th>Ação</th>
-            <th>Data</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Meu sistema não abre <a href="\logout">Sair</a></td>
-            <td>Sistema</td>
-            <td class="aberto">Aberto</td>
-            <td><a href="">Abrir chamado</a></td>
-            <td>19/03/2025</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Erro de Rede</td>
-            <td>Rede</td>
-            <td class="em-progresso">Em Progresso</td>
-            <td><a href="">Abrir chamado</a></td>
-            <td>10/04/2025</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Tela Azul</td>
-            <td>Windows</td>
-            <td class="fechado">Fechado</td>
-            <td><a href="">Reabrir chamado</a></td>
-            <td>23/03/2025</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>Computador Travando</td>
-            <td>Hardware</td>
-            <td class="em-progresso">Em Progresso</td>
-            <td><a href="">Abrir chamado</a></td>
-            <td>01/04/2025</td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>Arquivos Corrompidos</td>
-            <td>Arquivos</td>
-            <td class="aberto">Aberto</td>
-            <td><a href="">Abrir chamado</a></td>
-            <td>29/02/2025</td>
-          </tr>
-          <tr>
-            <td>6</td>
-            <td>Rede Lenta</td>
-            <td>Rede</td>
-            <td class="fechado">Fechado</td>
-            <td><a href="">Reabrir chamado</a></td>
-            <td>02/02/2025</td>
-          </tr>
-          <tr>
-            <td>7</td>
-            <td>Erro de login no sistema</td>
-            <td>Sistema</td>
-            <td class="em-progresso">Em Progresso</td>
-            <td><a href="">Abrir chamado</a></td>
-            <td>30/01/2025</td>
-          </tr>
-          <tr>
-            <td>8</td>
-            <td>Erro de Rede</td>
-            <td>Rede</td>
-            <td class="aberto">Aberto</td>
-            <td><a href="">Abrir chamado</a></td>
-            <td>17/03/2025</td>
-          </tr>
-          <tr>
-            <td>9</td>
-            <td>O sistema não abre</td>
-            <td>Sistema</td>
-            <td class="fechado">Fechado</td>
-            <td><a href="">Reabrir chamado</a></td>
-            <td>10/04/2025</td>
-          </tr>
-          <tr>
-            <td>10</td>
-            <td>Sistema Lento</td>
-            <td>Sistema</td>
-            <td class="em-progresso">Em Progresso</td>
-            <td><a href="">Abrir chamado</a></td>
-            <td>27/02/2025</td>
-          </tr>
-          <tr>
-            <td>11</td>
-            <td>Erro na rede</td>
-            <td>Rede</td>
-            <td class="aberto">Aberto</td>
-            <td><a href="">Abrir chamado</a></td>
-            <td>13/03/2025</td>
-          </tr>
-          <tr>
-            <td>12</td>
-            <td>Login Inválido</td>
-            <td>Sistema</td>
-            <td class="fechado">Fechado</td>
-            <td><a href="">Reabrir chamado</a></td>
-            <td>19/01/2025</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Meu sistema não abre</td>
-            <td>Sistema</td>
-            <td class="aberto">Aberto</td>
-            <td><a href="">Abrir chamado</a></td>
-            <td>19/03/2025</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Meu sistema não abre</td>
-            <td>Sistema</td>
-            <td class="aberto">Aberto</td>
-            <td><a href="">Abrir chamado</a></td>
-            <td>19/03/2025</td>
-          </tr>
-        </tbody>
-      </table>
+    <div id="content">
+      <div id="table-tickets">
+        <table>
+            <thead>
+              <tr>
+                <th id="num-request">Nº Chamado</th>
+                <th id="tittle">Título</th>
+                <th id="category">Categoria</th>
+                <th id="status">Status</th>
+                <th id="action">Ação</th>
+                <th id="date">Data</th>
+              </tr>
+          </span>
+          <tbody class="tbody">
+            <span class="jinja">
+              {% for table_item in tickets%}
+              <tr>
+                <td>{{table_item['id_ticket']}}</td>
+                <td>{{table_item['description']}}</td>
+                <td>{{table_item['keywords']}}</td>
+                <td class="{{table_item['status']}}">
+                  {{table_item['status']}}
+                </td>
+                <td><a href="">{{table_item['action']}}</a></td>
+                <td>{{table_item['created_at']}}</td>
+              </tr>
+              {% endfor %}
+            </span>
+            <tr>
+              <td>1</td>
+              <td>Meu sistema não abre <a href="\logout">Sair</a></td>
+              <td>Sistema</td>
+              <td class="open">Aberto</td>
+              <td><a href="">Abrir chamado</a></td>
+              <td>19/03/2025</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Erro de Rede</td>
+              <td>Rede</td>
+              <td class="in-progress">Em Progresso</td>
+              <td><a href="">Abrir chamado</a></td>
+              <td>10/04/2025</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Tela Azul</td>
+              <td>Windows</td>
+              <td class="closed">Fechado</td>
+              <td><a href="">Reabrir chamado</a></td>
+              <td>23/03/2025</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Computador Travando</td>
+              <td>Hardware</td>
+              <td class="in-progress">Em Progresso</td>
+              <td><a href="">Abrir chamado</a></td>
+              <td>01/04/2025</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>Arquivos Corrompidos</td>
+              <td>Arquivos</td>
+              <td class="open">Aberto</td>
+              <td><a href="">Abrir chamado</a></td>
+              <td>29/02/2025</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>Rede Lenta</td>
+              <td>Rede</td>
+              <td class="closed">Fechado</td>
+              <td><a href="">Reabrir chamado</a></td>
+              <td>02/02/2025</td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>Erro de login no sistema</td>
+              <td>Sistema</td>
+              <td class="in-progress">Em Progresso</td>
+              <td><a href="">Abrir chamado</a></td>
+              <td>30/01/2025</td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>Erro de Rede</td>
+              <td>Rede</td>
+              <td class="open">Aberto</td>
+              <td><a href="">Abrir chamado</a></td>
+              <td>17/03/2025</td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td>O sistema não abre</td>
+              <td>Sistema</td>
+              <td class="closed">Fechado</td>
+              <td><a href="">Reabrir chamado</a></td>
+              <td>10/04/2025</td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>Sistema Lento</td>
+              <td>Sistema</td>
+              <td class="in-progress">Em Progresso</td>
+              <td><a href="">Abrir chamado</a></td>
+              <td>27/02/2025</td>
+            </tr>
+            <tr>
+              <td>11</td>
+              <td>Erro na rede</td>
+              <td>Rede</td>
+              <td class="open">Aberto</td>
+              <td><a href="">Abrir chamado</a></td>
+              <td>13/03/2025</td>
+            </tr>
+            <tr>
+              <td>12</td>
+              <td>Login Inválido</td>
+              <td>Sistema</td>
+              <td class="closed">Fechado</td>
+              <td><a href="">Reabrir chamado</a></td>
+              <td>19/01/2025</td>
+            </tr>
+            <tr>
+              <td>13</td>
+              <td>Meu sistema não abre</td>
+              <td>Sistema</td>
+              <td class="closed">Fechado</td>
+              <td><a href="">Abrir chamado</a></td>
+              <td>24/05/2024</td>
+            </tr>
+            <tr>
+              <td>14</td>
+              <td>Meu sistema não abre</td>
+              <td>Sistema</td>
+              <td class="open">Aberto</td>
+              <td><a href="">Abrir chamado</a></td>
+              <td>31/03/2025</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </body>
 </html>

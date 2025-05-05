@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<link
+			rel="shortcut icon"
+			href="../static/img/icon.ico"
+			type="image/x-icon"
+		/>
+
+		<title>{{session['user'].name}}</title>
+
+		<link rel="stylesheet" href="../static/css/reset.css" />
+		<link rel="stylesheet" href="../static/css/style.css" />
+		<link rel="stylesheet" href="../static/css/chat.css" />
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+	<body>
+		<div class="background opacity"></div>
+		<div id="menu-bar">
+			<span id="brand">
+				<img src="../static/img/logo.png" alt="Logo" id="logo" />
+				<span id="brand-name">SUPORT AI</span>
+			</span>
+			<span id="user-name">{{session['user'].name}} </span>
+		</div>
+		<div id="content">
+			<div id="side-bar">
+				<button class="button" onclick="exibirAvaliacao()">
+					Fechar Chamado
+				</button>
+				<button class="button">Finalizar Atendimento</button>
+			</div>
+
+			<div id="chat">
+				<div id="messages">
+					<div class="mensagem remetente">
+						<div class="quem-mandou">Técnico:</div>
+						<span
+							>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt
+							debitis consequuntur unde fuga vitae ex doloremque laborum,
+							exercitationem hic dolor nesciunt repellendus pariatur adipisci,
+							minus itaque quibusdam, enim odio quasi!</span
+						>
+						<span class="horas">20:52</span>
+					</div>
+
+					<div class="mensagem usuario">
+						<div class="quem-mandou">Você:</div>
+						<span
+							>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam
+							aliquam dolor mollitia, culpa reprehenderit dolorem.</span
+						>
+						<span class="horas">20:52</span>
+					</div>
+					<div class="mensagem usuario">
+						<div class="quem-mandou">Você:</div>
+						<span
+							>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam
+							aliquam dolor mollitia, culpa reprehenderit dolorem.</span
+						>
+						<span class="horas">20:52</span>
+					</div>
+					<div class="mensagem usuario">
+						<div class="quem-mandou">Você:</div>
+						<span
+							>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam
+							aliquam dolor mollitia, culpa reprehenderit dolorem.</span
+						>
+						<span class="horas">20:52</span>
+					</div>
+					<div class="mensagem usuario">
+						<div class="quem-mandou">Você:</div>
+						<span
+							>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam
+							aliquam dolor mollitia, culpa reprehenderit dolorem.</span
+						>
+						<span class="horas">20:52</span>
+					</div>
+				</div>
+
+				<div id="mensagem-input">
+					<input type="text" name="texto" id="digitar-msg" />
+					<div id="botoes-chat">
+						<a href=""><i class="fa-solid fa-paperclip"></i></a>
+						<a href=""><i class="fa-solid fa-paper-plane"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

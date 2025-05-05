@@ -30,7 +30,7 @@
   }
 
   & #user-actions {
-    position:relative;
+    position: relative;
     width: 50%;
 
     display: flex;
@@ -39,8 +39,6 @@
 
     & .new-request {
       border-radius: 10px;
-      border-color: #3a00ad;
-
       width: 13vw;
       height: 6vh;
     }
@@ -48,61 +46,70 @@
     & #user-name {
       font-size: 2em;
       font-weight: 700 !important;
-      color: #000000;
+      color: #000;
       margin: auto 40px auto 15px;
     }
   }
 }
 
-#conteudo {
-  height: 76%;
-  width: 90%;
+#content {
+  height: 89vh;
+  width: 100vw;
 
-  margin: 2% auto 0 auto;
+  padding: 2% 6%;
 
-  overflow: auto;
-}
+  & #table-tickets {
+    height: 80vh;
+    overflow: auto;
 
-table {
-  width: 100%;
+    & table {
+      width: 100%;
+      text-align: center;
+      border-collapse: collapse;
+      border: 1px solid black;
 
-  text-align: center;
+      & thead {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        border: 1px solid black;
+        
 
-  border-collapse: collapse;
-}
+        & th{
+          background-color: #6998e8;
+          border: 1px solid black;
+          height: 7.3vh; 
+        }
+      }
+      
+      & td{
+        height: 6.7vh;
+        border: 1px solid black;
+      }
 
-th {
-  background-color: #6998e8;
-  width: auto;
-  height: 45px;
-}
+      & tr{
+        background-color: #f4f4f4;
+      }
 
-td,
-th {
-  height: 40px;
-  border: 1px solid black;
-}
+      & tr:nth-child(odd) {
+        background-color: #d4d4d4 !important;
+      }
 
-.aberto {
-  color: green;
-  font-weight: bold;
-}
 
-.em-progresso {
-  color: yellow;
-  font-weight: bold;
-}
+      & .open {
+        color: green;
+        font-weight: bold;
+      }
 
-.fechado {
-  color: red;
-  font-weight: bold;
-}
+      & .in-progress {
+        color: yellow;
+        font-weight: bold;
+      }
 
-#acoes-usuario {
-  height: 100%;
-  width: 50%;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+      & .closed {
+        color: red;
+        font-weight: bold;
+      }
+    }
+  }
 }

@@ -1,4 +1,4 @@
-body{
+body {
   display: flex;
   flex-direction: column;
 
@@ -28,7 +28,9 @@ body{
 
 .button {
   cursor: pointer;
-  background-color: #3A00AD !important;
-  color: #FFF !important;
-  border-color: #3A00AD !important;
+  background-color: #3a00ad !important;
+  color: #fff !important;
+  border-color: #3a00ad !important;
+  border-radius: 10px;
+  border-style: none;
 }
