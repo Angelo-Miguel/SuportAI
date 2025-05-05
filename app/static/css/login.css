@@ -1,217 +1,214 @@
 @font-face {
-  font-family: "Algerian";
-  src: url("../font/Algerian Regular.ttf") format("truetype");
+	font-family: "Algerian";
+	src: url("../font/Algerian Regular.ttf") format("truetype");
 }
 
 #menu-bar {
-  position: absolute;
-  top: 0px;
-  width: 100vw;
-  height: 11vh;
+	position: absolute;
+	top: 0px;
+	width: 100vw;
+	height: 11vh;
 
-  & #logo {
-    margin: 10px 0px 0px 10px;
-    height: 10vh;
-    width: auto;
-  }
+	& #logo {
+		width: auto;
+		height: 10vh;
+		margin: 10px 0px 0px 10px;
+	}
 }
 
 #login {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: center;
+	position: relative;
+	width: 100vw;
+	height: 100vh;
 
-  & #brand,
-  #space {
-    position: relative;
-    min-width: 26vw;
-    min-height: 70vh;
-    display: flex;
-    align-items: end;
+	& #brand,
+	#space {
+		display: flex;
+		align-items: end;
+		position: relative;
+		min-width: 26vw;
+		min-height: 70vh;
 
-    & p {
-      font-family: "Algerian", sans-serif !important;
-      font-size: 4rem;
-      color: #3a00ad;
-      line-height: 60px;
-    }
-  }
+		& p {
+			font-family: "Algerian", sans-serif !important;
+			font-size: 4rem;
+			color: #3a00ad;
+			line-height: 60px;
+		}
+	}
 
-  & #form-login {
-    border: 1px solid #3a00ad;
-    background-color: #fff;
-    min-width: 26vw;
-    min-height: 70vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
+	& #form-login {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		position: relative;
+		min-width: 26vw;
+		min-height: 70vh;
+		background-color: #fff;
+		border: 1px solid #3a00ad;
 
-    & #title {
-      width: 20vw;
-      color: #3a00ad;
-      font-weight: 900;
-      font-size: 3.75rem;
-      margin-bottom: 20px;
-    }
+		& #title {
+			width: 20vw;
+			font-weight: 900;
+			font-size: 3.75rem;
+			color: #3a00ad;
+			margin-bottom: 20px;
+		}
 
-    & div.email,
-    & div.password {
-      min-width: 20vw;
-      background-color: #f4f4f4;
+		& div.email,
+		& div.password {
+			min-width: 20vw;
+			background-color: #f4f4f4;
+			border: 1px solid #000;
+			border-radius: 10px;
+		}
 
-      border: 1px solid #000;
-      border-radius: 10px;
-    }
+		& label {
+			position: relative;
+			top: 9px;
+			left: -25%;
+			padding: 0 5px;
 
-    & label {
-      position: relative;
-      padding: 0 5px;
-      top: 9px;
-      left: -25%;
+			& .label-text {
+				position: relative;
+				z-index: 1;
+			}
 
-      & .label-text {
-        position: relative;
-        z-index: 1;
-      }
+			&::before {
+				content: "";
+				position: absolute;
+				top: 50%;
+				left: 0;
+				width: 100%;
+				height: 5px;
+				background-color: #f4f4f4;
+				z-index: 0; /* Fica atrás do texto */
+			}
+		}
 
-      &::before {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 0;
-        width: 100%;
-        height: 5px;
-        background-color: #F4F4F4;
-        z-index: 0; /* Fica atrás do texto */
-      }
-    }
+		& input:focus {
+			outline: none;
+		}
 
-    & input:focus {
-      outline: none;
-    }
+		& input:-webkit-autofill {
+			-webkit-box-shadow: 0 0 0px 1000px #f4f4f4 inset !important;
+		}
 
-    & input:-webkit-autofill{
-      -webkit-box-shadow: 0 0 0px 1000px #f4f4f4 inset !important;
-    }
+		& input {
+			position: relative;
+			width: 90%;
+			height: 6vh;
+			background-color: #f4f4f4;
+			border: none;
+			padding: 0px 30px 0px 5px;
+			margin: 0px 0px 0px 8px;
+		}
 
-    & input {
-      position: relative;
-      width: 90%;
-      height: 6vh;
-      background-color: #f4f4f4;
-      border: none;
-      padding: 0px 30px 0px 5px;
-      margin: 0px 0px 0px 8px;
-    }
+		& i {
+			position: relative;
+			margin-left: -10px;
 
-    & i {
-      position: relative;
-      margin-left: -10px;
+			&::before {
+				display: block;
+				width: 18px;
+			}
+		}
+		& .button {
+			width: 20vw;
+			height: 6vh;
+			font-size: 1.5rem;
+			font-weight: bold;
+			padding: 0px;
+			margin-left: 0px !important;
+			margin-top: 40px;
+		}
 
-      &::before {
-        display: block;
-        width: 18px;
-      }
-    }
-    & .button {
-      padding: 0px;
-      margin-left: 0px !important;
-      margin-top: 40px;
-      width: 20vw;
-      height: 6vh;
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
-
-    & .login-alert{
-      margin-top: 10px;
-      display: block;
-    }
-
-    & .jinja{
-      display: none;
-    }
-  }
+		& .login-alert {
+			display: block;
+			margin-top: 10px;
+		}
+	}
 }
 
 /* Media Queries Tablet*/
 @media screen and (min-width: 601px) and (max-width: 1024px) {
-  #login {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
+	#login {
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 20px;
 
-    & #space {
-      display: none;
-    }
+		& #space {
+			display: none;
+		}
 
-    & div#brand {
-      min-height: 1vh;
-      & p {
-        font-size: 3.75;
-        width: 100%;
-        text-align: center;
-      }
-    }
+		& div#brand {
+			min-height: 1vh;
 
-    & #form-login {
-      width: 55vw;
-      height: auto;
+			& p {
+				width: 100%;
+				font-size: 3.75;
+				text-align: center;
+			}
+		}
 
-      & #title {
-        min-width: 40vw;
-      }
+		& #form-login {
+			width: 55vw;
+			height: auto;
 
-      & div.email,
-      div.password {
-        min-width: 40vw;
-      }
+			& #title {
+				min-width: 40vw;
+			}
 
-      & .button {
-        min-width: 40vw;
-      }
-    }
-  }
+			& div.email,
+			div.password {
+				min-width: 40vw;
+			}
+
+			& .button {
+				min-width: 40vw;
+			}
+		}
+	}
 }
 
 /* Media Queries Celular*/
 @media screen and (max-width: 600px) {
-  #login {
-    flex-direction: column;
-    gap: 20px;
+	#login {
+		flex-direction: column;
+		gap: 20px;
 
-    & #space {
-      min-height: 5vh;
-    }
+		& #space {
+			min-height: 5vh;
+		}
 
-    & div#brand {
-      min-height: 2vh;
-      & p {
-        font-size: 3.4rem;
-      }
-    }
+		& div#brand {
+			min-height: 2vh;
 
-    & #form-login {
-      width: 93vw;
+			& p {
+				font-size: 3.4rem;
+			}
+		}
 
-      & #title {
-        min-width: 85vw;
-      }
+		& #form-login {
+			width: 93vw;
 
-      & div.email,
-      div.password {
-        min-width: 85vw;
-      }
+			& #title {
+				min-width: 85vw;
+			}
 
-      & .button {
-        min-width: 85vw;
-      }
-    }
-  }
+			& div.email,
+			div.password {
+				min-width: 85vw;
+			}
+
+			& .button {
+				min-width: 85vw;
+			}
+		}
+	}
 }

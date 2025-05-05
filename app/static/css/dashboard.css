@@ -4,21 +4,21 @@
 }
 
 #menu-bar {
-  position: relative;
-  top: 0px;
-  width: 100vw;
-  height: 11vh;
-
   display: flex;
   justify-content: space-between;
+  position: relative;
+  width: 100vw;
+  height: 11vh;
+  top: 0px;
 
   & #brand {
     display: flex;
     align-items: center;
+    
     & #logo {
-      margin: 3px 0px 0px 3px;
-      height: 10vh;
       width: auto;
+      height: 10vh;
+      margin: 3px 0px 0px 3px;
     }
 
     & #brand-name {
@@ -30,17 +30,16 @@
   }
 
   & #user-actions {
-    position: relative;
-    width: 50%;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
+    width: 50%;
 
     & .new-request {
-      border-radius: 10px;
       width: 13vw;
       height: 6vh;
+      border-radius: 10px;
     }
 
     & #user-name {
@@ -55,7 +54,6 @@
 #content {
   height: 89vh;
   width: 100vw;
-
   padding: 2% 6%;
 
   & #table-tickets {
@@ -74,7 +72,6 @@
         z-index: 1;
         border: 1px solid black;
         
-
         & th{
           background-color: #6998e8;
           border: 1px solid black;
@@ -94,7 +91,6 @@
       & tr:nth-child(odd) {
         background-color: #d4d4d4 !important;
       }
-
 
       & .open {
         color: green;

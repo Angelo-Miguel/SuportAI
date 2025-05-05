@@ -1,36 +1,38 @@
 body {
-  display: flex;
-  flex-direction: column;
-
-  width: 100vw;
-  height: 100vh;
-
-  background-size: cover;
-  user-select: none;
+	display: flex;
+	flex-direction: column;
+	width: 100vw;
+	height: 100vh;
+	background-size: cover;
+	user-select: none;
 }
 
 .background {
-  background-image: url("../img/PIM_Background.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  display: flex;
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-  align-items: center;
-  justify-content: center;
-  z-index: -10000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	background-image: url("../img/PIM_Background.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	z-index: -10000;
 }
 
 .opacity {
-  opacity: 0.4;
+	opacity: 0.4;
+}
+
+.jinja {
+	display: none;
 }
 
 .button {
-  cursor: pointer;
-  background-color: #3a00ad !important;
-  color: #fff !important;
-  border-color: #3a00ad !important;
-  border-radius: 10px;
-  border-style: none;
+	cursor: pointer;
+	background-color: #3a00ad !important;
+	color: #fff !important;
+	border-color: #3a00ad !important;
+	border-radius: 10px;
+	border-style: none;
 }
