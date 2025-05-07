@@ -24,6 +24,10 @@ body {
 	opacity: 0.4;
 }
 
+.inv {
+	user-select: none !important;
+}
+
 .jinja {
 	display: none;
 }
