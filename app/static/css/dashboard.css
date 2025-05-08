@@ -1,111 +1,111 @@
 @font-face {
-  font-family: "Algerian";
-  src: url("../font/Algerian Regular.ttf") format("truetype");
+	font-family: "Algerian";
+	src: url("../font/Algerian Regular.ttf") format("truetype");
 }
 
 #menu-bar {
-  display: flex;
-  justify-content: space-between;
-  position: relative;
-  width: 100vw;
-  height: 11vh;
-  top: 0px;
+	display: flex;
+	justify-content: space-between;
+	position: relative;
+	width: 100vw;
+	height: 11vh;
+	top: 0px;
 
-  & #brand {
-    display: flex;
-    align-items: center;
-    
-    & #logo {
-      width: auto;
-      height: 10vh;
-      margin: 3px 0px 0px 3px;
-    }
+	& #brand {
+		display: flex;
+		align-items: center;
 
-    & #brand-name {
-      font-family: "Algerian", sans-serif;
-      font-size: 3em;
-      color: #3a00ad;
-      margin: auto 0px auto 10px;
-    }
-  }
+		& #logo {
+			width: auto;
+			height: 10vh;
+			margin: 3px 0px 0px 3px;
+		}
 
-  & #user-actions {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-    width: 50%;
+		& #brand-name {
+			font-family: "Algerian", sans-serif;
+			font-size: 3em;
+			color: #3a00ad;
+			margin: auto 0px auto 10px;
+		}
+	}
 
-    & .new-request {
-      width: 13vw;
-      height: 6vh;
-      border-radius: 10px;
-    }
+	& #user-actions {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		position: relative;
+		width: 50%;
 
-    & #user-name {
-      font-size: 2em;
-      font-weight: 700 !important;
-      color: #000;
-      margin: auto 40px auto 15px;
-    }
-  }
+		& .new-request {
+			width: 13vw;
+			height: 6vh;
+			border-radius: 10px;
+		}
+
+		& #user-name {
+			font-size: 2em;
+			font-weight: 700 !important;
+			color: #000;
+			margin: auto 40px auto 15px;
+		}
+	}
 }
 
 #content {
-  height: 89vh;
-  width: 100vw;
-  padding: 2% 6%;
+	height: 89vh;
+	width: 100vw;
+	padding: 2% 6%;
 
-  & #table-tickets {
-    height: 80vh;
-    overflow: auto;
+	& #table-tickets {
+		height: 80vh;
+		overflow: auto;
+		border: 1px solid black;
 
-    & table {
-      width: 100%;
-      text-align: center;
-      border-collapse: collapse;
-      border: 1px solid black;
+		& table {
+			width: 100%;
+			text-align: center;
+			border-collapse: collapse;
 
-      & thead {
-        position: sticky;
-        top: 0;
-        z-index: 1;
-        border: 1px solid black;
-        
-        & th{
-          background-color: #6998e8;
-          border: 1px solid black;
-          height: 7.3vh; 
-        }
-      }
-      
-      & td{
-        height: 6.7vh;
-        border: 1px solid black;
-      }
+			& thead {
+				position: relative;
+				top: 0;
+				z-index: 1;
+				border: 1px solid black;
 
-      & tr{
-        background-color: #f4f4f4;
-      }
+				& th {
+					background-color: #6998e8;
+					border: 1px solid black;
+					height: 7.3vh;
+				}
+			}
 
-      & tr:nth-child(odd) {
-        background-color: #d4d4d4 !important;
-      }
+			& td {
+				height: 6.7vh;
+				border: 1px solid black;
+			}
 
-      & .open {
-        color: green;
-        font-weight: bold;
-      }
+			& tr {
+				background-color: #f4f4f4;
+			}
 
-      & .in-progress {
-        color: yellow;
-        font-weight: bold;
-      }
+			& tr:nth-child(odd) {
+				background-color: #d4d4d4 !important;
+			}
 
-      & .closed {
-        color: red;
-        font-weight: bold;
-      }
-    }
-  }
+			& .open {
+				color: green;
+				font-weight: bold;
+			}
+
+			& .in-progress {
+				color: yellow;
+				font-weight: bold;
+			}
+
+			& .closed {
+				color: red;
+				font-weight: bold;
+			}
+		}
+	}
 }

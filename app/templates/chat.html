@@ -22,96 +22,141 @@
 			href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
 			rel="stylesheet"
 		/>
+
+		<script
+			src="https://kit.fontawesome.com/a50434ada2.js"
+			crossorigin="anonymous"
+		></script>
 	</head>
 	<body>
-		<div class="background opacity"></div>
-		<div id="menu-bar">
-			<span id="brand">
-				<img src="../static/img/logo.png" alt="Logo" id="logo" />
-				<span id="brand-name">SUPORT AI</span>
-			</span>
-			<span id="user-name">{{session['user'].name}} </span>
-		</div>
-		<div id="content">
-			<div id="side-bar">
-				<button class="button" onclick="exibirAvaliacao()">
-					Fechar Chamado
-				</button>
-				<button class="button">Finalizar Atendimento</button>
-			</div>
+		<div class="modal-background" id="modal-feedback-background">
+			<div id="modal-feedback">
+				<div id="menu-bar">
+					<span class="inv"></span>
+					<h1>Avalie o Atendimento</h1>
 
-			<div id="chat">
-				<div id="messages">
-					<div class="mensage sender">
-						<div class="user-mensage">Técnico:</div>
-						<p class="mensage-text">
-							Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-							Voluptas, nam! Recusandae pariatur perferendis commodi suscipit
-							nostrum! Id nemo magnam voluptate placeat? Soluta quos, esse optio
-							alias ea earum dolorum sint!
-							<span class="inv">&nbsp &nbsp &nbsp &nbsp</span>
-							<span class="time-stamp">20:52</span>
-						</p>
-					</div>
-
-					<div class="mensage receiver">
-						<div class="user-mensage">Você:</div>
-						<p class="mensage-text">
-							Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-							Voluptas, nam! Recusandae pariatur perferendis commodi suscipit
-							nostrum!
-							<span class="inv">&nbsp &nbsp &nbsp &nbsp</span>
-							<span class="time-stamp">20:52</span>
-						</p>
-					</div>
-					<div class="mensage receiver">
-						<div class="user-mensage">Você:</div>
-						<p class="mensage-text">
-							Lorem, ipsum dolor
-							<span class="inv">&nbsp &nbsp &nbsp &nbsp</span>
-							<span class="time-stamp">20:52</span>
-						</p>
-					</div>
-					<div class="mensage sender">
-						<div class="user-mensage">Técnico:</div>
-						<p class="mensage-text">
-							Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit
-							incidunt quis maiores nesciunt minima velit veritatis eum culpa,
-							id itaque vel qui cum sed enim consequatur unde, voluptatum iusto
-							quasi, provident veniam saepe quisquam officia quia vitae! Quis
-							explicabo qui laudantium aliquam tenetur corporis voluptatem
-							veritatis sed ut sit vero iste ad consequuntur, a optio ratione.
-							Similique dolores, at, sequi iure quasi assumenda tempora atque
-							architecto accusamus, error eveniet autem. Facilis, libero enim
-							quod veritatis facere modi
-							<span class="inv">&nbsp &nbsp &nbsp &nbsp</span>
-							<span class="time-stamp">20:52</span>
-						</p>
-					</div>
-					<div class="mensage receiver">
-						<div class="user-mensage">Você:</div>
-						<p class="mensage-text">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam
-							corporis saepe mollitia quam voluptatem? Minima praesentium illum
-							commodi expedita reiciendis.
-							<span class="inv">&nbsp &nbsp &nbsp &nbsp</span>
-							<span class="time-stamp">20:52</span>
-						</p>
-					</div>
-					<div class="mensage receiver">
-						<div class="user-mensage">Você:</div>
-						<p class="mensage-text">
-							Lorem, ipsum.
-							<span class="inv">&nbsp &nbsp &nbsp &nbsp</span>
-							<span class="time-stamp">20:52</span>
-						</p>
-					</div>
+					<button
+						class="close"
+						onclick="openAndClose('modal-feedback-background','flex')"
+						aria-label="Fechar"
+					>
+						<i class="fa-solid fa-xmark"></i>
+					</button>
 				</div>
-				<div id="mensagem-input">
-					<input type="text" name="texto" id="digitar-msg" />
-					<div id="botoes-chat">
-						<a href=""><i class="fa-solid fa-paperclip"></i></a>
-						<a href=""><i class="fa-solid fa-paper-plane"></i></a>
+
+				<div id="content">
+					<span id="estrelas">
+						<i class="fa-regular fa-star" id="1"></i>
+						<i class="fa-regular fa-star" id="2"></i>
+						<i class="fa-regular fa-star" id="3"></i>
+						<i class="fa-regular fa-star" id="4"></i>
+						<i class="fa-regular fa-star" id="5"></i>
+					</span>
+
+					<form action="">
+						<input type="number" id="nota" hidden />
+						<input
+							type="submit"
+							class="botao botoes enviar-avaliacao"
+							value="Enviar"
+						/>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div id="container">
+			<div class="background opacity"></div>
+			<div id="menu-bar">
+				<span id="brand">
+					<img src="../static/img/logo.png" alt="Logo" id="logo" />
+					<span id="brand-name">SUPORT AI</span>
+				</span>
+				<span id="user-name">{{session['user'].name}} </span>
+			</div>
+			<div id="content">
+				<div id="side-bar">
+					<button class="button" onclick="exibirAvaliacao()">
+						Fechar Chamado
+					</button>
+					<button class="button">Finalizar Atendimento</button>
+				</div>
+
+				<div id="chat">
+					<div id="messages">
+						<div class="mensage sender">
+							<div class="user-mensage">Técnico:</div>
+							<p class="mensage-text">
+								Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+								Voluptas, nam! Recusandae pariatur perferendis commodi suscipit
+								nostrum! Id nemo magnam voluptate placeat? Soluta quos, esse
+								optio alias ea earum dolorum sint!
+								<span class="inv">&nbsp &nbsp &nbsp &nbsp</span>
+								<span class="time-stamp">20:52</span>
+							</p>
+						</div>
+
+						<div class="mensage receiver">
+							<div class="user-mensage">Você:</div>
+							<p class="mensage-text">
+								Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+								Voluptas, nam! Recusandae pariatur perferendis commodi suscipit
+								nostrum!
+								<span class="inv">&nbsp &nbsp &nbsp &nbsp</span>
+								<span class="time-stamp">20:52</span>
+							</p>
+						</div>
+						<div class="mensage receiver">
+							<div class="user-mensage">Você:</div>
+							<p class="mensage-text">
+								Lorem, ipsum dolor
+								<span class="inv">&nbsp &nbsp &nbsp &nbsp</span>
+								<span class="time-stamp">20:52</span>
+							</p>
+						</div>
+						<div class="mensage sender">
+							<div class="user-mensage">Técnico:</div>
+							<p class="mensage-text">
+								Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit
+								incidunt quis maiores nesciunt minima velit veritatis eum culpa,
+								id itaque vel qui cum sed enim consequatur unde, voluptatum
+								iusto quasi, provident veniam saepe quisquam officia quia vitae!
+								Quis explicabo qui laudantium aliquam tenetur corporis
+								voluptatem veritatis sed ut sit vero iste ad consequuntur, a
+								optio ratione. Similique dolores, at, sequi iure quasi assumenda
+								tempora atque architecto accusamus, error eveniet autem.
+								Facilis, libero enim quod veritatis facere modi
+								<span class="inv">&nbsp &nbsp &nbsp &nbsp</span>
+								<span class="time-stamp">20:52</span>
+							</p>
+						</div>
+						<div class="mensage receiver">
+							<div class="user-mensage">Você:</div>
+							<p class="mensage-text">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+								Aperiam corporis saepe mollitia quam voluptatem? Minima
+								praesentium illum commodi expedita reiciendis.
+								<span class="inv">&nbsp &nbsp &nbsp &nbsp</span>
+								<span class="time-stamp">20:52</span>
+							</p>
+						</div>
+						<div class="mensage receiver">
+							<div class="user-mensage">Você:</div>
+							<p class="mensage-text">
+								Lorem, ipsum.
+								<span class="inv">&nbsp &nbsp &nbsp &nbsp</span>
+								<span class="time-stamp">20:52</span>
+							</p>
+						</div>
+					</div>
+					<div id="chat-bottom">
+						<div id="mensage-input">
+							<input type="text" name="texto" />
+							<div id="icons">
+								<a href=""><i class="fa-solid fa-paperclip"></i></a>
+								<a href=""><i class="fa-solid fa-paper-plane"></i></a>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

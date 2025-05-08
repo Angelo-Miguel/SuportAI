@@ -31,8 +31,10 @@
 				<span id="brand-name">SUPORT AI</span>
 			</span>
 			<div id="user-actions">
-				<input type="submit" class="button new-request" value="Novo Chamado" />
-				<span id="user-name">{{session['user'].name}} </span>
+				<input type="button" class="button new-request" value="Novo Chamado" />
+				<span id="user-name">
+					<span class="jinja">{{session['user'].name}}</span>
+				</span>
 				<!-- DEBUG: tirar depois -->
 				<a href="\logout">Sair</a>
 			</div>
@@ -54,22 +56,34 @@
 					<tbody class="tbody">
 						<span class="jinja"> {% for table_item in tickets%} </span>
 						<tr>
-							<td>{{table_item['id_ticket']}}</td>
-							<td>{{table_item['description']}}</td>
-							<td>{{table_item['keywords']}}</td>
-							<td class="{{table_item['status']}}">{{table_item['status']}}</td>
-							<td><a href="">{{table_item['action']}}</a></td>
-							<td>{{table_item['created_at']}}</td>
+							<td><span class="jinja">{{table_item['ticket_id']}}</span></td>
+							<td><span class="jinja">{{table_item['title']}}</span></td>
+							<td><span class="jinja">{{table_item['category']}}</span></td>
+							<td class="{{table_item['status']}}">
+								<span class="jinja">
+									{% if table_item['status'] == 'open' %} Aberto {% elif
+									table_item['status'] == 'closed' %} Fechado {% elif
+									table_item['status'] == 'in-progress' %} Em Andamento {% else
+									%} {{table_item['status']}} {% endif %}
+								</span>
+							</td>
+							<td>
+								<a href="">
+									<span class="jinja">
+										{% if ((table_item['status'] == 'open') or
+										(table_item['status'] == 'in-progress')) %} Abrir Chamado {%
+										elif table_item['status'] == 'closed' %} Reabrir Chamado {%
+										else %} {{table_item['status']}} {% endif %}
+									</span>
+								</a>
+							</td>
+							<td>
+								<span class="jinja"
+									>{{table_item['created_at'].strftime('%d/%m/%y')}}</span
+								>
+							</td>
 						</tr>
 						<span class="jinja"> {% endfor %} </span>
-						<tr>
-							<td>1</td>
-							<td>Meu sistema não abre</td>
-							<td>Sistema</td>
-							<td class="open">Aberto</td>
-							<td><a href="">Abrir chamado</a></td>
-							<td>19/03/2025</td>
-						</tr>
 					</tbody>
 				</table>
 			</div>

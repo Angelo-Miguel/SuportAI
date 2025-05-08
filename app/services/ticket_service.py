@@ -11,7 +11,7 @@ class TicketService:
         
         try:
             cursor.execute(
-                'SELECT * FROM tickets WHERE fk_users_id_user = %s',
+                'SELECT * FROM tickets WHERE user_id = %s',
                 (user_id,)
             )
             tickets = cursor.fetchall()
