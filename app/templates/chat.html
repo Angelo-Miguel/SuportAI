@@ -32,9 +32,7 @@
 		<div class="modal-background" id="modal-feedback-background">
 			<div id="modal-feedback">
 				<div id="menu-bar">
-					<span class="inv"></span>
 					<h1>Avalie o Atendimento</h1>
-
 					<button
 						class="close"
 						onclick="openAndClose('modal-feedback-background','flex')"
@@ -45,7 +43,7 @@
 				</div>
 
 				<div id="content">
-					<span id="estrelas">
+					<span id="stars">
 						<i class="fa-regular fa-star" id="1"></i>
 						<i class="fa-regular fa-star" id="2"></i>
 						<i class="fa-regular fa-star" id="3"></i>
@@ -54,10 +52,10 @@
 					</span>
 
 					<form action="">
-						<input type="number" id="nota" hidden />
+						<input type="number" id="feedback-grade" hidden />
 						<input
 							type="submit"
-							class="botao botoes enviar-avaliacao"
+							class="button feed-back"
 							value="Enviar"
 						/>
 					</form>
@@ -76,10 +74,13 @@
 			</div>
 			<div id="content">
 				<div id="side-bar">
-					<button class="button" onclick="exibirAvaliacao()">
-						Fechar Chamado
+					<button class="button">Fechar Chamado</button>
+					<button
+						class="button"
+						onclick="openAndClose('modal-feedback-background','flex')"
+					>
+						Finalizar Atendimento
 					</button>
-					<button class="button">Finalizar Atendimento</button>
 				</div>
 
 				<div id="chat">
@@ -161,5 +162,6 @@
 				</div>
 			</div>
 		</div>
+		<script defer src="../static/js/scripts.js"></script>
 	</body>
 </html>

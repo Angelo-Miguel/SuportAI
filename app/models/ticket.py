@@ -1,12 +1,18 @@
-# app/services/ticket_service.py
+# app/models/ticket.py
 from app.database.db_connection import MySQLConnection
 
-class TicketService:
-    def __init__(self):
+class Ticket:
+    def __init__(self, id=None, title=None, category=None, description=None, user_id=None):
+        self.id = id
+        self.title = title
+        self.category = category
+        self.description = description
+        self.user_id = user_id
         self.db = MySQLConnection()
-
-    def show_tickets(self, user_id):
-        conn = self.db.get_connection()
+    
+    @classmethod
+    def show_tickets(cls, user_id):
+        conn = cls().db.get_connection()
         cursor = conn.cursor(dictionary=True)
         
         try:
@@ -20,15 +26,15 @@ class TicketService:
             raise e
         finally:
             cursor.close()
-    
-    def new_ticket(self, title, category, description, user_id):
+
+    def new_ticket(self):
         conn = self.db.get_connection()
         cursor = conn.cursor(dictionary=True)
         
         try:
             cursor.execute(
-                'INSERT INTO tickets (title , category, description, user_id) VALUES (%s, %s, %s, %s)',
-                (title, category, description, user_id)
+                'INSERT INTO tickets (title, category, description, user_id) VALUES (%s, %s, %s, %s)',
+                (self.title, self.category, self.description, self.user_id)
             )
             conn.commit()
             return True

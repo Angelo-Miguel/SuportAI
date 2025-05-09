@@ -14,7 +14,7 @@ def create_app():
     app.static_folder='app/static'
     
     # Configurações secritas e de debug
-    app.secret_key = os.getenv('SECRET_KEY', 'fallback_secret_key')# DEBUG: SECRET_KEY: Set in .env
+    app.secret_key = os.getenv('SECRET_KEY', 'fallback_secret_key')
     app.debug = os.getenv('DEBUG', 'False').lower() in ('true', '1', 't') # DEBUG: Set False in production .env
     
     # Importar e registrar blueprints
@@ -26,9 +26,11 @@ def register_blueprints(app):
     # Registra todos os blueprints da aplicação
     from app.controllers.auth_controller import auth_bp
     from app.controllers.user_controller import user_bp
+    from app.controllers.ticket_controller import ticket_bp
     
     app.register_blueprint(auth_bp)
     app.register_blueprint(user_bp)
+    app.register_blueprint(ticket_bp)
 
 if __name__ == '__main__':
     app = create_app()

@@ -22,70 +22,123 @@
 			href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
 			rel="stylesheet"
 		/>
+
+		<script
+			src="https://kit.fontawesome.com/a50434ada2.js"
+			crossorigin="anonymous"
+		></script>
 	</head>
 	<body>
-		<div class="background opacity"></div>
-		<div id="menu-bar">
-			<span id="brand">
-				<img src="../static/img/logo.png" alt="Logo" id="logo" />
-				<span id="brand-name">SUPORT AI</span>
-			</span>
-			<div id="user-actions">
-				<input type="button" class="button new-request" value="Novo Chamado" />
-				<span id="user-name">
-					<span class="jinja">{{session['user'].name}}</span>
-				</span>
-				<!-- DEBUG: tirar depois -->
-				<a href="\logout">Sair</a>
+		<div class="modal-background" id="modal-new-request-background">
+			<div id="modal-new-request">
+				<div id="menu-bar">
+					<h1>Novo chamado</h1>
+					<button
+						class="close"
+						onclick="openAndClose('modal-new-request-background','flex')"
+						aria-label="Fechar"
+					>
+						<i class="fa-solid fa-xmark"></i>
+					</button>
+				</div>
+				<div id="content">
+					<form action="/new-ticket" method="POST" id="form-new-request">
+						<label for="title">Título:</label>
+						<input type="text" name="title" id="title" required/>
+
+						<label for="category">Categoria:</label>
+						<select name="category" id="category" required>
+							<option disabled selected>Selecione a Categoria:</option>
+							<option value="rede">Rede</option>
+							<option value="sistema">Sistema</option>
+							<option value="hardware">Hardware</option>
+							<option value="TESTE">TESTE <!-- DEBUG: remove later --></option>
+						</select>
+
+						<label for="description">Descrição</label>
+						<textarea
+							id="description"
+							name="description"
+							placeholder="Insira oque aconteceu de forma clara e concisa"
+							class="texto"
+							rows="5"
+							required
+						></textarea>
+
+						<input type="submit" class="button" value="Enviar" />
+					</form>
+				</div>
 			</div>
 		</div>
-		<div id="content">
-			<div id="table-tickets">
-				<table>
-					<thead>
-						<tr>
-							<th id="num-request">Nº Chamado</th>
-							<th id="tittle">Título</th>
-							<th id="category">Categoria</th>
-							<th id="status">Status</th>
-							<th id="action">Ação</th>
-							<th id="date">Data</th>
-						</tr>
-					</thead>
+		<div id="container">
+			<div class="background opacity"></div>
+			<div id="menu-bar">
+				<span id="brand">
+					<img src="../static/img/logo.png" alt="Logo" id="logo" />
+					<span id="brand-name">SUPORT AI</span>
+				</span>
+				<div id="user-actions">
+					<input
+						type="button"
+						class="button new-request"
+						value="Novo Chamado"
+						onclick="openAndClose('modal-new-request-background','flex')"
+					/>
+					<span id="user-name">
+						<span class="jinja">{{session['user'].name}}</span>
+					</span>
+					<!-- DEBUG: tirar depois -->
+					<a href="\logout">Sair</a>
+				</div>
+			</div>
+			<div id="content">
+				<div id="table-tickets">
+					<table>
+						<thead>
+							<tr>
+								<th id="num-request">Nº Chamado</th>
+								<th id="tittle">Título</th>
+								<th id="category">Categoria</th>
+								<th id="status">Status</th>
+								<th id="action">Ação</th>
+								<th id="date">Data</th>
+							</tr>
+						</thead>
 
-					<tbody class="tbody">
-						<span class="jinja"> {% for table_item in tickets%} </span>
-						<tr>
-							<td><span class="jinja">{{table_item['ticket_id']}}</span></td>
-							<td><span class="jinja">{{table_item['title']}}</span></td>
-							<td><span class="jinja">{{table_item['category']}}</span></td>
-							<td class="{{table_item['status']}}">
-								<span class="jinja">
-									{% if table_item['status'] == 'open' %} Aberto {% elif
-									table_item['status'] == 'closed' %} Fechado {% elif
-									table_item['status'] == 'in-progress' %} Em Andamento {% else
-									%} {{table_item['status']}} {% endif %}
-								</span>
-							</td>
-							<td>
-								<a href="">
+						<tbody class="tbody">
+							<span class="jinja"> {% for table_item in tickets%} </span>
+							<tr>
+								<td><span class="jinja">{{table_item['ticket_id']}}</span></td>
+								<td><span class="jinja">{{table_item['title']}}</span></td>
+								<td><span class="jinja">{{table_item['category']}}</span></td>
+								<td class="{{table_item['status']}}">
 									<span class="jinja">
-										{% if ((table_item['status'] == 'open') or
-										(table_item['status'] == 'in-progress')) %} Abrir Chamado {%
-										elif table_item['status'] == 'closed' %} Reabrir Chamado {%
+										{% if table_item['status'] == 'open' %} Aberto {% elif
+										table_item['status'] == 'closed' %} Fechado {% elif
+										table_item['status'] == 'in-progress' %} Em Andamento {%
 										else %} {{table_item['status']}} {% endif %}
 									</span>
-								</a>
-							</td>
-							<td>
-								<span class="jinja"
-									>{{table_item['created_at'].strftime('%d/%m/%y')}}</span
-								>
-							</td>
-						</tr>
-						<span class="jinja"> {% endfor %} </span>
-					</tbody>
-				</table>
+								</td>
+								<td>
+									<a href="">
+										<span class="jinja">
+											{% if ((table_item['status'] == 'open') or
+											(table_item['status'] == 'in-progress')) %} Abrir Chamado
+											{% elif table_item['status'] == 'closed' %} Reabrir
+											Chamado {% else %} {{table_item['status']}} {% endif %}
+										</span>
+									</a>
+								</td>
+								<td>
+									<span class="jinja"
+										>{{table_item['created_at'].strftime('%d/%m/%y')}}</span
+									>
+								</td>
+							</tr>
+							<span class="jinja"> {% endfor %} </span>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 		<script defer src="../static/js/scripts.js"></script>

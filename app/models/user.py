@@ -1,4 +1,4 @@
-# app/models/usuario.py
+# app/models/user.py
 from app.database.db_connection import MySQLConnection
 
 class Usuario:
