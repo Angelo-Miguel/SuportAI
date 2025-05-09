@@ -43,27 +43,55 @@
 				</div>
 				<div id="content">
 					<form action="/new-ticket" method="POST" id="form-new-request">
-						<label for="title">Título:</label>
-						<input type="text" name="title" id="title" required/>
+						<label for="title">
+							<span class="label-text">Título:</span>
+						</label>
+						<div class="title">
+							<input
+								type="text"
+								id="title"
+								name="title"
+								placeholder="Digite o Título"
+								required
+							/>
+						</div>
 
-						<label for="category">Categoria:</label>
-						<select name="category" id="category" required>
-							<option disabled selected>Selecione a Categoria:</option>
-							<option value="rede">Rede</option>
-							<option value="sistema">Sistema</option>
-							<option value="hardware">Hardware</option>
-							<option value="TESTE">TESTE <!-- DEBUG: remove later --></option>
-						</select>
+						<label for="category">
+							<span class="label-text">Categoria:</span>
+						</label>
 
-						<label for="description">Descrição</label>
-						<textarea
-							id="description"
-							name="description"
-							placeholder="Insira oque aconteceu de forma clara e concisa"
-							class="texto"
-							rows="5"
-							required
-						></textarea>
+						<div class="category">
+							<select
+								name="category"
+								id="category"
+								required
+								onchange="document.getElementById('category').style.color = 'black'"
+								style="color: #767676;"
+							>
+								<option disabled selected class="placeholder">
+									Selecione a Categoria:
+								</option>
+								<option value="rede">Rede</option>
+								<option value="sistema">Sistema</option>
+								<option value="hardware">Hardware</option>
+								<option value="TESTE">
+									TESTE
+									<!-- DEBUG: remove later -->
+								</option>
+							</select>
+						</div>
+						<label for="description">
+							<span class="label-text">Descrição:</span>
+						</label>
+						<div class="description">
+							<textarea
+								id="description"
+								name="description"
+								placeholder="Insira oque aconteceu de forma clara e concisa"
+								rows="5"
+								required
+							></textarea>
+						</div>
 
 						<input type="submit" class="button" value="Enviar" />
 					</form>
