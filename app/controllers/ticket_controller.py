@@ -20,3 +20,19 @@ def new_ticket():
     
     session['ticket'] = ticket.__dict__
     return redirect(url_for('chat.chat'))
+
+@ticket_bp.route('/open-ticket', methods=['POST'])
+def open_ticket():
+    print('ticket')
+    if 'user' not in session:
+        return redirect(url_for('auth.login_page'))
+
+    ticket_id = request.form.get('ticket_id')
+    ticket = ticket_service.get_ticket_by_id(ticket_id)
+
+    
+    if ticket:
+        session['ticket'] = ticket
+        return redirect(url_for('chat.chat', ticket=ticket))
+    else:
+        return "Ticket not found", 404

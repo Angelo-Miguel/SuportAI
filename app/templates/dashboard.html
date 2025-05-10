@@ -66,7 +66,7 @@
 								id="category"
 								required
 								onchange="document.getElementById('category').style.color = 'black'"
-								style="color: #767676;"
+								style="color: #767676"
 							>
 								<option disabled selected class="placeholder">
 									Selecione a Categoria:
@@ -148,14 +148,29 @@
 									</span>
 								</td>
 								<td>
-									<a href="">
-										<span class="jinja">
-											{% if ((table_item['status'] == 'open') or
-											(table_item['status'] == 'in-progress')) %} Abrir Chamado
-											{% elif table_item['status'] == 'closed' %} Reabrir
-											Chamado {% else %} {{table_item['status']}} {% endif %}
-										</span>
-									</a>
+									<form
+										id="form-open-ticket-{{ table_item['ticket_id'] }}"
+										action="/open-ticket"
+										method="POST"
+									>
+										<input
+											type="hidden"
+											name="ticket_id"
+											value="{{ table_item['ticket_id'] }}"
+										/>
+										<a
+											href="#"
+											onclick="document.getElementById(`form-open-ticket-{{ table_item['ticket_id'] }}`).submit();"
+										>
+											<span class="jinja">
+												{% if table_item['status'] == 'open' or
+												table_item['status'] == 'in-progress' %} Abrir Chamado
+												{% elif table_item['status'] == 'closed' %} Reabrir
+												Chamado {% else %} {{ table_item['status'] }} {% endif
+												%}
+											</span>
+										</a>
+									</form>
 								</td>
 								<td>
 									<span class="jinja"

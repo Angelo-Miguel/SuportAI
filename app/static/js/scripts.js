@@ -20,6 +20,29 @@ function openAndClose(elementId, displayType) {
 	}
 }
 
+function pintarEstrelas(){
+    for (let i = 0; i < estrelas.length; i++) { /* Funcionamento das estrelas Antes de serem clicadas */
+        estrelas[i].addEventListener('mouseover', function pintar(){
+            if(bloquear_estrelas == false){
+                for (let j = 0; j < i+1; j++) {
+                    estrelas[j].classList.remove("fa-regular", "fa-star")
+                    estrelas[j].classList.add("fa-solid", "fa-star")          
+                    /* Remove as estrelas vaziar e adiciona estrelas solid ao passar o mouse na estrela */
+                }
+            }
+        })
+        estrelas[i].addEventListener('mouseout', function apagar(){
+            if (bloquear_estrelas == false) { /* Ver linha 53 */
+                for (let j = 0; j <i+1; j++) {
+                    estrelas[j].classList.remove("fa-solid", "fa-star")
+                    estrelas[j].classList.add("fa-regular", "fa-star")          
+                    /* Remove estrelas solid e adiciona estrelas vazias ao tirar o mouse da estrela */
+                }
+            }
+        })
+    }
+}
+
 /* DEBUG liveserver jinja*/
 document.addEventListener("DOMContentLoaded", function () {
 	const jinjaSpans = document.querySelectorAll(".jinja")

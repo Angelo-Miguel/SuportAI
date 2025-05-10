@@ -38,3 +38,19 @@ class TicketService():
             raise e
         finally:
             cursor.close()
+
+    def get_ticket_by_id(self, ticket_id):
+        conn = self.db.get_connection()
+        cursor = conn.cursor(dictionary=True)
+        
+        try:
+            cursor.execute(
+                'SELECT * FROM tickets WHERE ticket_id = %s',
+                (ticket_id,)
+            )
+            ticket = cursor.fetchone()
+            return ticket
+        except Exception as e:
+            raise e
+        finally:
+            cursor.close()
