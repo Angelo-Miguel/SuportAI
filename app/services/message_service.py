@@ -23,6 +23,24 @@ class MessageService:
         finally:
             cursor.close()
             
-    #TODO: Terminar de fazer a rota e função send_message
-    def send_message(self, message: Message):
-        conn = MySQLConnection().get_connection()
+    def send_message(self, message):
+        conn = self.db.get_connection()
+        cursor = conn.cursor(dictionary=True)
+        
+        try:
+            # Executa o INSERT para adicionar o msg no banco
+            cursor.execute(
+                'INSERT INTO messages (message, user_id, ticket_id) VALUES (%s, %s, %s)',
+                (message.message, message.user_id, message.ticket_id)
+            )
+            # Commit para salvar as alterações no banco
+            conn.commit()
+            
+            #TODO: Se necessario inserir um logica para retornar o id 
+            return None
+        except Exception as e:
+            # Em caso de erro, desfaz as alterações no banco
+            conn.rollback()
+            raise e
+        finally:
+            cursor.close()

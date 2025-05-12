@@ -183,7 +183,7 @@
 				bottom: 0px;
 				padding: 0px 42px 0px 30px;
 
-				& #mensage-input {
+				& #form-mensage-input {
 					display: flex;
 					align-items: center;
 					justify-content: center;

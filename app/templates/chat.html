@@ -95,7 +95,9 @@
 							<p class="mensage-text">
 								{{msg['message']}}
 								<span class="inv">&nbsp &nbsp &nbsp &nbsp</span>
-								<span class="time-stamp">{{msg['sent_at'].strftime('%H:%M')}}</span>
+								<span class="time-stamp">
+									{{msg['sent_at'].strftime('%H:%M')}}
+								</span>
 							</p>
 						</div>
 						{%else%}
@@ -105,7 +107,9 @@
 							<p class="mensage-text">
 								{{msg['message']}}
 								<span class="inv">&nbsp &nbsp &nbsp &nbsp</span>
-								<span class="time-stamp">{{msg['sent_at'].strftime('%H:%M')}}</span>
+								<span class="time-stamp"
+									>{{msg['sent_at'].strftime('%H:%M')}}</span
+								>
 							</p>
 						</div>
 						{% endif %} {% endfor %}
@@ -176,18 +180,32 @@
 					</div>
 					<div id="chat-bottom">
 						<!-- TODO:Terminar o formulario fazer o link funcionar como um botao submit -->
-						<form action="/send-msg" method="post" id="mensage-input">
-							<input type="text" name="texto" />
+						<form action="/send-msg" method="POST" id="form-mensage-input">
+							<input
+								type="text"
+								name="ticket_id"
+								value="{{ticket['id']}}"
+								hidden
+							/>
+							<input type="text" name="message" />
 							<div id="icons">
-								<a href=""><i class="fa-solid fa-paperclip"></i></a>
-								<a href=""><i class="fa-solid fa-paper-plane"></i></a>
+								<a href="">
+									<i class="fa-solid fa-paperclip"></i>
+								</a>
+								<a
+									href="#"
+									onclick="document.getElementById(`form-mensage-input`).submit();"
+								>
+									<i class="fa-solid fa-paper-plane"></i
+								></a>
+							</div>
 						</form>
-						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<script defer src="../static/js/scripts.js"></script>
 		<script defer src="../static/js/stars_script.js"></script>
+		<script defer src="../static/js/message_script.js"></script>
 	</body>
 </html>
