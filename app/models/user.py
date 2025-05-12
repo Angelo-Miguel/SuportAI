@@ -1,9 +1,8 @@
 # app/models/user.py
-from app.database.db_connection import MySQLConnection
 
-class Usuario:
-    def __init__(self, id=None, nome=None, email=None, senha=None):
-        self.id = id
-        self.nome = nome
-        self.email = email
-        self.senha = senha
+class User:
+    def __init__(self, data):
+        self.id = data.get('user_id')
+        self.name = data.get('name')
+        self.email = data.get('email')
+        self.role = data.get('role')

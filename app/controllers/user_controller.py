@@ -6,7 +6,7 @@ user_bp = Blueprint('user', __name__)
 
 @user_bp.route('/user')
 def dashboard():
-    tickets = TicketService().show_tickets(session['user']['user_id'])
+    tickets = TicketService().show_tickets(session['user']['id'])
     
     # Página do usuário
     if 'user' not in session:

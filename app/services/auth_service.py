@@ -1,7 +1,7 @@
 # app/services/auth_service.py
-from app.models.user import Usuario
+from app.models.user import User
 from app.database.db_connection import MySQLConnection
-from flask import session, flash, redirect
+from flask import flash
 import hashlib
 
 class AuthService:
@@ -25,11 +25,10 @@ class AuthService:
                 (email, password)
             )
             
-            user = cursor.fetchone()
+            user = User(cursor.fetchone())
             cursor.close()
             
             if user:
-                session['user'] = user
                 return user
             else:
                 flash('Usuário ou senha incorretos!', 'danger')

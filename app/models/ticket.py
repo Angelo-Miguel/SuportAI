@@ -1,10 +1,10 @@
 # app/models/ticket.py
-from app.database.db_connection import MySQLConnection
-
 class Ticket:
-    def __init__(self, id=None, title=None, category=None, description=None, user_id=None):
-        self.id = id
-        self.title = title
-        self.category = category
-        self.description = description
-        self.user_id = user_id
+    def __init__(self, data):
+        self.id = data.get('ticket_id')
+        self.title = data.get('title')
+        self.category = data.get('category')
+        self.description = data.get('description')
+        self.status = data.get('status')
+        self.created_at = data.get('created_at')
+        self.user_id = data.get('user_id')

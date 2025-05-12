@@ -22,18 +22,31 @@ class TicketService():
         finally:
             cursor.close()
     
-    def new_ticket(self, ticket: Ticket):
+    def new_ticket(self, ticket):
         conn = self.db.get_connection()
         cursor = conn.cursor(dictionary=True)
-        
+    
         try:
+            # Executa o INSERT para adicionar o ticket no banco
             cursor.execute(
-                'INSERT INTO tickets (title , category, description, user_id) VALUES (%s, %s, %s, %s)',
+                'INSERT INTO tickets (title, category, description, user_id) VALUES (%s, %s, %s, %s)',
                 (ticket.title, ticket.category, ticket.description, ticket.user_id)
             )
+            # Commit para salvar as alterações no banco
             conn.commit()
-            return True
+            
+            # Recupera o ID do último ticket inserido
+            cursor.execute('SELECT LAST_INSERT_ID()')
+            result = cursor.fetchone()
+            if result:
+                ticket_id = result['LAST_INSERT_ID()'] # type: ignore  #HACK: ERROR: No overloads for "__getitem__" match the provided arguments
+            else:
+                ticket_id = None
+                
+            # Retorna o ID gerado
+            return ticket_id
         except Exception as e:
+            # Em caso de erro, desfaz as alterações no banco
             conn.rollback()
             raise e
         finally:
@@ -48,7 +61,7 @@ class TicketService():
                 'SELECT * FROM tickets WHERE ticket_id = %s',
                 (ticket_id,)
             )
-            ticket = cursor.fetchone()
+            ticket = Ticket(cursor.fetchone())
             return ticket
         except Exception as e:
             raise e

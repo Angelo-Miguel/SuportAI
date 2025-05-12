@@ -74,6 +74,8 @@
 			</div>
 			<div id="content">
 				<div id="side-bar">
+					<!-- TODO: fazer um css para exibir essas informações -->
+					{{ticket}}
 					<button class="button">Fechar Chamado</button>
 					<button
 						class="button"
@@ -85,7 +87,29 @@
 
 				<div id="chat">
 					<div id="messages">
+						{% for msg in messages%} {% if msg['user_id'] !=
+						session['user']['id'] %}
+						<!-- Técnico ou IA -->
 						<div class="mensage sender">
+							<div class="user-mensage">{{msg['name']}} ({{msg['role']}}):</div>
+							<p class="mensage-text">
+								{{msg['message']}}
+								<span class="inv">&nbsp &nbsp &nbsp &nbsp</span>
+								<span class="time-stamp">{{msg['sent_at'].strftime('%H:%M')}}</span>
+							</p>
+						</div>
+						{%else%}
+						<!-- Usúario -->
+						<div class="mensage receiver">
+							<div class="user-mensage">{{msg['name']}}:</div>
+							<p class="mensage-text">
+								{{msg['message']}}
+								<span class="inv">&nbsp &nbsp &nbsp &nbsp</span>
+								<span class="time-stamp">{{msg['sent_at'].strftime('%H:%M')}}</span>
+							</p>
+						</div>
+						{% endif %} {% endfor %}
+						<!-- <div class="mensage sender">
 							<div class="user-mensage">Técnico:</div>
 							<p class="mensage-text">
 								Lorem, ipsum dolor sit amet consectetur adipisicing elit.
@@ -148,15 +172,16 @@
 								<span class="inv">&nbsp &nbsp &nbsp &nbsp</span>
 								<span class="time-stamp">20:52</span>
 							</p>
-						</div>
+						</div> -->
 					</div>
 					<div id="chat-bottom">
-						<div id="mensage-input">
+						<!-- TODO:Terminar o formulario fazer o link funcionar como um botao submit -->
+						<form action="/send-msg" method="post" id="mensage-input">
 							<input type="text" name="texto" />
 							<div id="icons">
 								<a href=""><i class="fa-solid fa-paperclip"></i></a>
 								<a href=""><i class="fa-solid fa-paper-plane"></i></a>
-							</div>
+						</form>
 						</div>
 					</div>
 				</div>

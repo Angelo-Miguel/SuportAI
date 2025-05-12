@@ -23,8 +23,13 @@ def login():
     
     auth_service = AuthService()
     user = auth_service.authenticate(email, password)
-    
     if user:
+        session['user'] = {
+            'id': user.__dict__['id'],
+            'name': user.__dict__['name'],                
+            'email': user.__dict__['email'],
+            'role': user.__dict__['role']
+        }
         return redirect(url_for('user.dashboard'))
     else:
         return redirect(url_for('auth.login_page'))

@@ -1,19 +1,22 @@
 # app/controllers/user_controller.py
 from flask import Blueprint, render_template, session, redirect, url_for
-
+from app.services.ticket_service import TicketService
+from app.services.message_service import MessageService
 
 chat_bp = Blueprint('chat', __name__)
+ticket_service = TicketService()
+message_service = MessageService()
 
-@chat_bp.route('/chat/<ticket>')
-def chat(ticket):
+@chat_bp.route('/chat/<ticket_id>')
+def chat(ticket_id):
     if 'user' not in session:
         return redirect(url_for('auth.login_page'))
+    ticket = ticket_service.get_ticket_by_id(ticket_id).__dict__
+    messages = message_service.show_messages(ticket_id)
     
-    #TODO: fazer a função get_messages_by_ticket_id
-    #TODO: trocar as sessões por classes
-    """ messages = ticket.get_messages_by_ticket_id(ticket['ticket_id']) """
-    return render_template('chat.html', user=session['user'], ticket=ticket, messages={"1":"Oi, tudo bem?","2":"Sim, e você?","1":"Estou bem, obrigado!"})
+    return render_template('chat.html', user=session['user'], ticket=ticket, messages=messages)
 
-""" @chat_bp.route('/send-message', methods=['POST'])
+#TODO: Terminar de fazer a rota e função send_message
+@chat_bp.route('/send-msg', methods=['POST'])
 def send_message():
-    pass """
+    return chat(1)
