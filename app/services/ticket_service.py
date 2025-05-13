@@ -43,7 +43,7 @@ class TicketService():
             else:
                 ticket_id = None
                 
-            # Retorna o ID gerado
+            # Retorna o ID gerado pelo banco
             return ticket_id
         except Exception as e:
             # Em caso de erro, desfaz as alterações no banco

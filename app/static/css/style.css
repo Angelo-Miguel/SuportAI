@@ -52,6 +52,13 @@ body {
 	border-style: none;
 }
 
+#logout{
+	color: #000;
+	font-size: 2rem;
+	margin-left: 10px;
+	
+}
+
 div::-webkit-scrollbar {
 	width: 12px;
 }

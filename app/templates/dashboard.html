@@ -1,3 +1,4 @@
+<!-- TODO: Responsividade -->
 <!DOCTYPE html>
 <html lang="pt-br">
 	<head>
@@ -113,10 +114,13 @@
 						onclick="openAndClose('modal-new-request-background','flex')"
 					/>
 					<span id="user-name">
-						<span class="jinja">{{session['user'].name}}</span>
+						<span class="jinja">
+							{{session['user'].name}}
+							<a id="logout" href="\logout">
+								<i class="fa-solid fa-right-from-bracket"></i>
+							</a>
+						</span>
 					</span>
-					<!-- DEBUG: tirar depois -->
-					<a href="\logout">Sair</a>
 				</div>
 			</div>
 			<div id="content">

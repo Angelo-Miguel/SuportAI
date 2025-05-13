@@ -1,3 +1,4 @@
+<!-- TODO: Responsividade -->
 <!DOCTYPE html>
 <html lang="pt-br">
 	<head>
@@ -70,12 +71,18 @@
 					<img src="../static/img/logo.png" alt="Logo" id="logo" />
 					<span id="brand-name">SUPORT AI</span>
 				</span>
-				<span id="user-name">{{session['user'].name}} </span>
+				<span id="user-name">
+					{{session['user'].name}}
+					<a id="logout" href="\logout">
+						<i class="fa-solid fa-right-from-bracket"></i>
+					</a>
+				</span>
 			</div>
 			<div id="content">
 				<div id="side-bar">
 					<!-- TODO: fazer um css para exibir essas informações -->
 					{{ticket}}
+					<!-- TODO: fazer o link ou rota para fechar o chamado e voltar para o dashborad -->
 					<button class="button">Fechar Chamado</button>
 					<button
 						class="button"
@@ -179,7 +186,6 @@
 						</div> -->
 					</div>
 					<div id="chat-bottom">
-						<!-- TODO:Terminar o formulario fazer o link funcionar como um botao submit -->
 						<form action="/send-msg" method="POST" id="form-mensage-input">
 							<input
 								type="text"
