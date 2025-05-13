@@ -106,9 +106,26 @@
 			align-items: center;
 			width: 30vw;
 			height: 89vh;
-			padding-top: 10vh;
+			padding: 3vh 2vw;
 			background-color: white;
 			border-right: 1px solid #d9d9d9;
+
+			& #info {
+				display: flex;
+				flex-direction: column;
+				width: 100%;
+				margin-bottom: 10vh;
+
+				& span{
+					margin-bottom: 2vh;
+					font-size: 1rem;
+
+					&.title{
+						font-size: 1.5rem;
+						font-weight: 600;
+					}
+				}
+			}
 
 			& .button {
 				width: 20vw;
@@ -133,7 +150,7 @@
 				height: 80vh;
 				padding: 10px 30px;
 				margin: 0px 0px 2px 0px;
-				overflow-y: scroll;
+				overflow-y: auto;
 
 				& .mensage {
 					position: relative;

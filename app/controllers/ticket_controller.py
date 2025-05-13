@@ -1,23 +1,36 @@
+# app/controllers/ticket_controller.py
 from flask import Blueprint, request, session, redirect, url_for
 from app.models.ticket import Ticket
+from app.models.message import Message
 from app.services.ticket_service import TicketService
+from app.services.message_service import MessageService
 
 ticket_bp = Blueprint('ticket', __name__)
 ticket_service = TicketService()
+message_service = MessageService()
 
 @ticket_bp.route('/new-ticket', methods=['POST'])
 def new_ticket():
     if 'user' not in session:
         return redirect(url_for('auth.login_page'))
 
+    #Crinado o ticket
     ticket = Ticket({
         'title': request.form.get('title'),
         'category': request.form.get('category'),
         'description': request.form.get('description'),
         'user_id': session['user']['id']
     })
-    
     ticket_id = ticket_service.new_ticket(ticket)
+      
+    # Primeira msg do usuario
+    user_message = Message({
+        'message': request.form.get('description'),
+        'user_id': session['user']['id'],
+        'ticket_id': ticket_id
+    })
+    message_service.send_message(user_message)
+      
     return redirect(url_for('chat.chat',ticket_id = ticket_id))
 
 @ticket_bp.route('/open-ticket', methods=['POST'])

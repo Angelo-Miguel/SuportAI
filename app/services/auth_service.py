@@ -8,7 +8,7 @@ class AuthService:
     def __init__(self):
         self.db = MySQLConnection()
     
-    #Criptografa a senha usando MD5 # FIXME: considerar usar bcrypt em produção
+    # Criptografa a senha usando MD5 # FIXME: considerar usar bcrypt em produção
     def _hash_password(self, password):
         return hashlib.md5(password.encode()).hexdigest()
     
@@ -24,12 +24,10 @@ class AuthService:
                 'SELECT * FROM users WHERE email = %s AND password = %s',
                 (email, password)
             )
-            
-            user = User(cursor.fetchone())
+            user_data = cursor.fetchone()
             cursor.close()
-            
-            if user:
-                return user
+            if user_data:
+                return User(user_data)
             else:
                 flash('Usuário ou senha incorretos!', 'danger')
                 return None

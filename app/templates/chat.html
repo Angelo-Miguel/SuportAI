@@ -80,10 +80,20 @@
 			</div>
 			<div id="content">
 				<div id="side-bar">
-					<!-- TODO: fazer um css para exibir essas informações -->
-					{{ticket}}
+					<!-- FIXME: Melhorar o css e html das info -->
+					<div id="info">
+						<span class="title">Título: {{ticket['title']}}</span>
+						<span class="category">Categoria: {{ticket['category']}}</span>
+						<span class="datetime">Data: {{ticket['created_at']}}</span>
+						<span class="status">
+							Status:
+							<span class="{{ticket['status']}}">{{ticket['status']}}</span>
+						</span>
+					</div>
 					<!-- TODO: fazer o link ou rota para fechar o chamado e voltar para o dashborad -->
-					<button class="button">Fechar Chamado</button>
+					<form action="/exit" method="POST">
+						<input type="submit" class="button" value="Fechar Chamado" />
+					</form>
 					<button
 						class="button"
 						onclick="openAndClose('modal-feedback-background','flex')"
@@ -94,8 +104,10 @@
 
 				<div id="chat">
 					<div id="messages">
-						{% for msg in messages%} {% if msg['user_id'] !=
-						session['user']['id'] %}
+						<span class="jinja">
+							{% for msg in messages%} {% if msg['user_id'] !=
+							session['user']['id'] %}
+						</span>
 						<!-- Técnico ou IA -->
 						<div class="mensage sender">
 							<div class="user-mensage">{{msg['name']}} ({{msg['role']}}):</div>
@@ -107,7 +119,7 @@
 								</span>
 							</p>
 						</div>
-						{%else%}
+						<span class="jinja">{%else%}</span>
 						<!-- Usúario -->
 						<div class="mensage receiver">
 							<div class="user-mensage">{{msg['name']}}:</div>
@@ -119,7 +131,7 @@
 								>
 							</p>
 						</div>
-						{% endif %} {% endfor %}
+						<span class="jinja"> {% endif %} {% endfor %} </span>
 						<!-- <div class="mensage sender">
 							<div class="user-mensage">Técnico:</div>
 							<p class="mensage-text">
