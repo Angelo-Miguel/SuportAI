@@ -1,3 +1,4 @@
+# TODO: colocar rollback e close conn nas funções
 # app/services/message_service.py
 from app.database.db_connection import MySQLConnection
 from app.models.message import Message
@@ -21,6 +22,7 @@ class MessageService:
         except Exception as e:
             raise e
         finally:
+            conn.close()
             cursor.close()
             
     def send_message(self, message):
@@ -43,4 +45,5 @@ class MessageService:
             conn.rollback()
             raise e
         finally:
+            conn.close()
             cursor.close()

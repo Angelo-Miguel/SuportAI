@@ -18,9 +18,12 @@ class TicketService():
             tickets = cursor.fetchall()
             return tickets
         except Exception as e:
+            # Em caso de erro, desfaz as alterações no banco
+            conn.rollback()
             raise e
         finally:
             cursor.close()
+            conn.close()
     
     def new_ticket(self, ticket):
         conn = self.db.get_connection()
@@ -51,6 +54,7 @@ class TicketService():
             raise e
         finally:
             cursor.close()
+            conn.close()
 
     def get_ticket_by_id(self, ticket_id):
         conn = self.db.get_connection()
@@ -64,6 +68,29 @@ class TicketService():
             ticket = Ticket(cursor.fetchone())
             return ticket
         except Exception as e:
+            # Em caso de erro, desfaz as alterações no banco
+            conn.rollback()
             raise e
         finally:
             cursor.close()
+            conn.close()
+            
+    def change_ticket_status(self, status, ticket_id):
+        conn = self.db.get_connection()
+        cursor = conn.cursor(dictionary=True)
+        
+        try:
+            cursor.execute(
+                'UPDATE tickets SET `status` = %s WHERE ticket_id = %s;',
+                (status, ticket_id,)
+            )
+            conn.commit()
+            
+        except Exception as e:
+            # Em caso de erro, desfaz as alterações no banco
+            conn.rollback()
+            raise e
+        finally:
+            cursor.close()
+            conn.close()
+        

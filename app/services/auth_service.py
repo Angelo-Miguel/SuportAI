@@ -1,3 +1,4 @@
+# TODO: colocar rollback e close conn nas funções
 # app/services/auth_service.py
 from app.models.user import User
 from app.database.db_connection import MySQLConnection

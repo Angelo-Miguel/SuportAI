@@ -39,7 +39,6 @@ def send_message():
     message_service.send_message(user_message)
     #TODO: terminar o loop da ia
     if request.form.get('status') == 'ia':
-        print("message: ",user_message.__dict__)
         start_ai_thread(user_message.__dict__)
     return redirect(request.referrer)
 
@@ -52,8 +51,7 @@ def close_chat():
 
 def ai(user_message):
     #resposta da IA
-    ai_response = ia_service.chat_with_ai(user_message['message'], user_message['ticket_id'])
-    print("msg: ",user_message['message'])
+    ai_response, should_transfer= ia_service.chat_with_ai(user_message['message'], user_message['ticket_id'])
 
     ai_message = Message({
         'message': ai_response,
@@ -61,6 +59,9 @@ def ai(user_message):
         'ticket_id': user_message['ticket_id']
     })
     message_service.send_message(ai_message)
+    
+    if should_transfer:
+        ticket_service.change_ticket_status('open', user_message['ticket_id'])
     
 def start_ai_thread(user_message):
     threading.Thread(target=ai, args=(user_message,)).start()

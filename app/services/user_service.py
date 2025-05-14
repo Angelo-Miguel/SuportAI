@@ -27,4 +27,5 @@ class UserService:
             conn.rollback()
             raise e
         finally:
+            conn.close()
             cursor.close()
