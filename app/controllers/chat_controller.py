@@ -1,6 +1,6 @@
 # app/controllers/chat_controller.py
 from flask import Blueprint, render_template, session, redirect, url_for, request
-import asyncio
+import threading
 from app.services.ticket_service import TicketService
 from app.services.message_service import MessageService
 from app.services.ai_service import IaService
@@ -22,7 +22,7 @@ def chat(ticket_id):
     messages = message_service.show_messages(ticket_id)
     
     if ticket['status'] == 'ia' and len(messages) == 1:
-        asyncio.run(ai(messages[0]))
+        start_ai_thread(messages[0])
         
     return render_template('chat.html', user=session['user'], ticket=ticket, messages=messages)
 
@@ -38,7 +38,9 @@ def send_message():
     })
     message_service.send_message(user_message)
     #TODO: terminar o loop da ia
-    #if ticket['status'] == 'ia':
+    if request.form.get('status') == 'ia':
+        print("message: ",user_message.__dict__)
+        start_ai_thread(user_message.__dict__)
     return redirect(request.referrer)
 
 @chat_bp.route('/exit', methods=['POST'])
@@ -48,9 +50,9 @@ def close_chat():
 
     return redirect(url_for('user.dashboard'))
 
-async def ai(user_message):
+def ai(user_message):
     #resposta da IA
-    ai_response = ia_service.chat_with_ai(user_message['message'])
+    ai_response = ia_service.chat_with_ai(user_message['message'], user_message['ticket_id'])
     print("msg: ",user_message['message'])
 
     ai_message = Message({
@@ -59,3 +61,6 @@ async def ai(user_message):
         'ticket_id': user_message['ticket_id']
     })
     message_service.send_message(ai_message)
+    
+def start_ai_thread(user_message):
+    threading.Thread(target=ai, args=(user_message,)).start()

@@ -3,6 +3,7 @@
 	src: url("../font/Algerian Regular.ttf") format("truetype");
 }
 
+
 .modal-background {
 	& #modal-feedback {
 		display: flex;

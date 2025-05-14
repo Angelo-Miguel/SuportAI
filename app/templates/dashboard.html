@@ -145,11 +145,11 @@
 								<td><span class="jinja">{{table_item['category']}}</span></td>
 								<td class="{{table_item['status']}}">
 									<span class="jinja">
-										{% if table_item['status'] == 'open' %} Aberto {% elif
-										table_item['status'] == 'ia' %} Triagem {% elif
+										{% if table_item['status'] == 'ia' %} Triagem IA {% elif
+										table_item['status'] == 'open' %} Aberto {% elif
 										table_item['status'] == 'closed' %} Fechado {% elif
 										table_item['status'] == 'in-progress' %} Em Andamento {%
-										else %} {{table_item['status']}} {% endif %}
+										else %} {{table_item['status']}} {% endif %}	
 									</span>
 								</td>
 								<td>
