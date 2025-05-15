@@ -2,7 +2,7 @@ from flask import Flask
 from dotenv import load_dotenv
 import os
 
-# Carrega variáveis de ambiente
+# Carrega variáveis de ambiente e forca override 
 load_dotenv(override=True)
 
 def create_app():
@@ -13,7 +13,7 @@ def create_app():
     app.template_folder='app/templates'
     app.static_folder='app/static'
     
-    # Configurações secritas e de debug
+    # Configurações secret key e de debug
     app.secret_key = os.getenv('SECRET_KEY', 'fallback_secret_key')
     app.debug = os.getenv('DEBUG', 'False').lower() in ('true', '1', 't') # DEBUG: Set False in production .env
     

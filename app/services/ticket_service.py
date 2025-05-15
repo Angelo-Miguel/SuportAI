@@ -11,15 +11,14 @@ class TicketService():
         cursor = conn.cursor(dictionary=True)
         
         try:
+            # Mostra dos os tickets do usuário
             cursor.execute(
                 'SELECT * FROM tickets WHERE user_id = %s',
                 (user_id,)
             )
-            tickets = cursor.fetchall()
-            return tickets
+            return cursor.fetchall()
+        
         except Exception as e:
-            # Em caso de erro, desfaz as alterações no banco
-            conn.rollback()
             raise e
         finally:
             cursor.close()
@@ -30,16 +29,15 @@ class TicketService():
         cursor = conn.cursor(dictionary=True)
     
         try:
-            # Executa o INSERT para adicionar o ticket no banco
+            # Executa o INSERT para adicionar o novo ticket no banco
             cursor.execute(
                 'INSERT INTO tickets (title, category, description, user_id) VALUES (%s, %s, %s, %s)',
                 (ticket.title, ticket.category, ticket.description, ticket.user_id)
             )
-            # Commit para salvar as alterações no banco
             conn.commit()
             
             # Recupera o ID do último ticket inserido
-            cursor.execute('SELECT LAST_INSERT_ID()')
+            cursor.execute('SELECT LAST_INSERT_ID() AS id')
             result = cursor.fetchone()
             if result:
                 ticket_id = result['LAST_INSERT_ID()'] # type: ignore  #HACK: ERROR: No overloads for "__getitem__" match the provided arguments
@@ -49,7 +47,6 @@ class TicketService():
             # Retorna o ID gerado pelo banco
             return ticket_id
         except Exception as e:
-            # Em caso de erro, desfaz as alterações no banco
             conn.rollback()
             raise e
         finally:
@@ -57,6 +54,7 @@ class TicketService():
             conn.close()
 
     def get_ticket_by_id(self, ticket_id):
+        # Mostra o ticket da id selecionado
         conn = self.db.get_connection()
         cursor = conn.cursor(dictionary=True)
         
@@ -65,17 +63,16 @@ class TicketService():
                 'SELECT * FROM tickets WHERE ticket_id = %s',
                 (ticket_id,)
             )
-            ticket = Ticket(cursor.fetchone())
-            return ticket
+            
+            return Ticket(cursor.fetchone())
         except Exception as e:
-            # Em caso de erro, desfaz as alterações no banco
-            conn.rollback()
             raise e
         finally:
             cursor.close()
             conn.close()
             
     def change_ticket_status(self, status, ticket_id):
+        # Troca o status do tikcets
         conn = self.db.get_connection()
         cursor = conn.cursor(dictionary=True)
         
@@ -87,7 +84,6 @@ class TicketService():
             conn.commit()
             
         except Exception as e:
-            # Em caso de erro, desfaz as alterações no banco
             conn.rollback()
             raise e
         finally:

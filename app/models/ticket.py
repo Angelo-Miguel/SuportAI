@@ -1,4 +1,5 @@
 # app/models/ticket.py
+# Classe das tickets
 class Ticket:
     def __init__(self, data):
         self.id = data.get('ticket_id')

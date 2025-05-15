@@ -5,25 +5,28 @@ from app.services.user_service import UserService
 
 auth_bp = Blueprint('auth', __name__)
 
+auth_service = AuthService()
+user_service = UserService()
+
 @auth_bp.route('/')
 def home():
     # Rota principal que redireciona para login
-    return redirect(url_for('auth.login'))
+    return redirect(url_for('auth.login_page'))
 
 @auth_bp.route('/login')
 def login_page():
     # Exibe a página de login
     return render_template('login.html')
 
-@auth_bp.route('/login', methods=['POST'])
-def login():
+@auth_bp.route('/auth', methods=['POST'])
+def auth():
     # Processa o formulário de login
     email = request.form.get('email')
     password = request.form.get('password')
     
-    auth_service = AuthService()
     user = auth_service.authenticate(email, password)
     if user:
+        # cria a sessão para o usuario
         session['user'] = {
             'id': user.__dict__['id'],
             'name': user.__dict__['name'],                
@@ -34,7 +37,14 @@ def login():
     else:
         return redirect(url_for('auth.login_page'))
 
+@auth_bp.route('/logout')
+def logout():
+    # Realiza logout do usuário
+    session.pop('user', None)
+    return redirect(url_for('auth.login_page'))
+
 # TODO: Implementar o ADM para gerenciar usuários e permissões
+# TODO: criar um proprio controller e trocar o try do register
 @auth_bp.route('/cadastro')
 def register_page():
     # Exibe a página de cadastro
@@ -47,7 +57,6 @@ def register():
     email = request.form.get('email')
     password = request.form.get('password')
     
-    user_service = UserService()
     try:
         user_service.create_user(nome, email, password)
         flash('Cadastro realizado com sucesso!', 'success')
@@ -55,9 +64,3 @@ def register():
     except Exception as e:
         flash(f'Erro ao cadastrar: {str(e)}', 'danger')
         return redirect(url_for('auth.register_page'))
-
-@auth_bp.route('/logout')
-def logout():
-    # Realiza logout do usuário
-    session.pop('user', None)
-    return redirect(url_for('auth.login_page'))

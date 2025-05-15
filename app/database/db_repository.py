@@ -1,5 +1,8 @@
+# app/database/db_repository.py
 from app.database.db_connection import MySQLConnection
 
+# Classe com o repositorio do banco de dados
+# TODO: implementar nos servicos,**AINDA NÃO FOI USUADA**
 class BaseRepository:
     def __init__(self):
         self.db = MySQLConnection()
@@ -22,4 +25,5 @@ class BaseRepository:
             conn.rollback()
             raise e
         finally:
+            conn.close()
             cursor.close()

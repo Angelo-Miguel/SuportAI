@@ -2,7 +2,6 @@ const stars = Array.from(document.querySelectorAll(".fa-star"));
 const inputFeedback = document.getElementById("feedback-grade");
 let starsLocked = false;
 
-
 function updateStars(limit) {
     // Função para atualizar as estrelas visualmente
 	stars.forEach((star, i) => {
@@ -28,6 +27,7 @@ document.addEventListener("mouseout", (e) => {
 });
 
 document.addEventListener("click", (e) => {
+	// bloqueia na estrela escolhido e atualiza o input com a nota
 	if (e.target.classList.contains("fa-star")) {
 		const i = stars.indexOf(e.target);
 		starsLocked = true;

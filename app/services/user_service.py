@@ -12,10 +12,9 @@ class UserService:
     
     #Cria um novo usuário no banco de dados
     def create_user(self, name, email, password):
-        hashed_password = self._hash_password(password)
-        
         conn = self.db.get_connection()
         cursor = conn.cursor(dictionary=True)
+        hashed_password = self._hash_password(password)
         
         try:
             cursor.execute(

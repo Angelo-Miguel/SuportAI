@@ -90,7 +90,6 @@
 							<span class="{{ticket['status']}}">{{ticket['status']}}</span>
 						</span>
 					</div>
-					<!-- TODO: fazer o link ou rota para fechar o chamado e voltar para o dashborad -->
 					<form action="/exit" method="POST">
 						<input type="submit" class="button" value="Fechar Chamado" />
 					</form>
@@ -108,6 +107,7 @@
 							{% for msg in messages%} {% if msg['user_id'] !=
 							session['user']['id'] %}
 						</span>
+
 						<!-- Técnico ou IA -->
 						<div class="mensage sender">
 							<div class="user-mensage">{{msg['name']}} ({{msg['role']}}):</div>
@@ -120,82 +120,19 @@
 							</p>
 						</div>
 						<span class="jinja">{%else%}</span>
+
 						<!-- Usúario -->
 						<div class="mensage receiver">
 							<div class="user-mensage">{{msg['name']}}:</div>
 							<p class="mensage-text">
 								{{msg['message']}}
 								<span class="inv">&nbsp &nbsp &nbsp &nbsp</span>
-								<span class="time-stamp"
-									>{{msg['sent_at'].strftime('%H:%M')}}</span
-								>
+								<span class="time-stamp">
+									{{msg['sent_at'].strftime('%H:%M')}}
+								</span>
 							</p>
 						</div>
 						<span class="jinja"> {% endif %} {% endfor %} </span>
-						<!-- <div class="mensage sender">
-							<div class="user-mensage">Técnico:</div>
-							<p class="mensage-text">
-								Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-								Voluptas, nam! Recusandae pariatur perferendis commodi suscipit
-								nostrum! Id nemo magnam voluptate placeat? Soluta quos, esse
-								optio alias ea earum dolorum sint!
-								<span class="inv">&nbsp &nbsp &nbsp &nbsp</span>
-								<span class="time-stamp">20:52</span>
-							</p>
-						</div>
-
-						<div class="mensage receiver">
-							<div class="user-mensage">Você:</div>
-							<p class="mensage-text">
-								Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-								Voluptas, nam! Recusandae pariatur perferendis commodi suscipit
-								nostrum!
-								<span class="inv">&nbsp &nbsp &nbsp &nbsp</span>
-								<span class="time-stamp">20:52</span>
-							</p>
-						</div>
-						<div class="mensage receiver">
-							<div class="user-mensage">Você:</div>
-							<p class="mensage-text">
-								Lorem, ipsum dolor
-								<span class="inv">&nbsp &nbsp &nbsp &nbsp</span>
-								<span class="time-stamp">20:52</span>
-							</p>
-						</div>
-						<div class="mensage sender">
-							<div class="user-mensage">Técnico:</div>
-							<p class="mensage-text">
-								Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit
-								incidunt quis maiores nesciunt minima velit veritatis eum culpa,
-								id itaque vel qui cum sed enim consequatur unde, voluptatum
-								iusto quasi, provident veniam saepe quisquam officia quia vitae!
-								Quis explicabo qui laudantium aliquam tenetur corporis
-								voluptatem veritatis sed ut sit vero iste ad consequuntur, a
-								optio ratione. Similique dolores, at, sequi iure quasi assumenda
-								tempora atque architecto accusamus, error eveniet autem.
-								Facilis, libero enim quod veritatis facere modi
-								<span class="inv">&nbsp &nbsp &nbsp &nbsp</span>
-								<span class="time-stamp">20:52</span>
-							</p>
-						</div>
-						<div class="mensage receiver">
-							<div class="user-mensage">Você:</div>
-							<p class="mensage-text">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-								Aperiam corporis saepe mollitia quam voluptatem? Minima
-								praesentium illum commodi expedita reiciendis.
-								<span class="inv">&nbsp &nbsp &nbsp &nbsp</span>
-								<span class="time-stamp">20:52</span>
-							</p>
-						</div>
-						<div class="mensage receiver">
-							<div class="user-mensage">Você:</div>
-							<p class="mensage-text">
-								Lorem, ipsum.
-								<span class="inv">&nbsp &nbsp &nbsp &nbsp</span>
-								<span class="time-stamp">20:52</span>
-							</p>
-						</div> -->
 					</div>
 					<div id="chat-bottom">
 						<form action="/send-msg" method="POST" id="form-mensage-input">
@@ -220,14 +157,16 @@
 									href="#"
 									onclick="document.getElementById(`form-mensage-input`).submit();"
 								>
-									<i class="fa-solid fa-paper-plane"></i
-								></a>
+									<i class="fa-solid fa-paper-plane"></i>
+								</a>
 							</div>
 						</form>
 					</div>
 				</div>
 			</div>
 		</div>
+		
+		<!-- JavaScript -->
 		<script defer src="../static/js/scripts.js"></script>
 		<script defer src="../static/js/stars_script.js"></script>
 		<script defer src="../static/js/message_script.js"></script>

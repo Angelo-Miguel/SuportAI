@@ -3,7 +3,6 @@
 	src: url("../font/Algerian Regular.ttf") format("truetype");
 }
 
-
 .modal-background {
 	& #modal-feedback {
 		display: flex;
@@ -184,6 +183,7 @@
 						font-size: 12px;
 					}
 				}
+				
 				& .sender {
 					margin-right: auto;
 					border-bottom-left-radius: 5px;
@@ -194,6 +194,7 @@
 					border-bottom-right-radius: 5px;
 				}
 			}
+
 			#chat-bottom {
 				position: relative;
 				width: 100%;
