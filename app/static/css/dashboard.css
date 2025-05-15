@@ -172,32 +172,33 @@
 		width: 100vw;
 		padding: 2% 6%;
 
+		/* TODO: implementar a tabela do gustavo */
 		& #table-tickets {
 			height: 80vh;
 			overflow: auto;
-			border: 1px solid black;
+			border: 1px solid #000;
 
 			& table {
 				width: 100%;
 				text-align: center;
-				border-collapse: collapse;
+				border-collapse: separate;
+				border-spacing: 0;
 
 				& thead {
-					position: relative;
+					position: sticky;
 					top: 0;
 					z-index: 1;
-					border: 1px solid black;
 
 					& th {
 						background-color: #6998e8;
-						border: 1px solid black;
+						border: 1px solid #000;
 						height: 7.3vh;
 					}
 				}
 
 				& td {
 					height: 6.7vh;
-					border: 1px solid black;
+					border: 1px solid #000;
 				}
 
 				& tr {
@@ -213,17 +214,17 @@
 				}
 
 				& .open {
-					color: green;
+					color: #008000;
 					font-weight: bold;
 				}
 
 				& .in-progress {
-					color: yellow;
+					color: #ffff00;
 					font-weight: bold;
 				}
 
 				& .closed {
-					color: red;
+					color: #ff0000;
 					font-weight: bold;
 				}
 			}
