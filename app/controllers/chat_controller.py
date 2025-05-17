@@ -21,11 +21,17 @@ def chat(ticket_id):
     
     ticket = ticket_service.get_ticket_by_id(ticket_id).__dict__
     messages = message_service.show_messages(ticket_id)
-    
-     # Controla se ia vai responder ou não
-    if ticket['status'] == 'ia':
-        start_ai_thread(messages[0])
-        
+    first_user_message = session.pop('first_user_message', None)
+
+    # Lógica para iniciar a primeira msg com a ia e gravar no banco de dados    
+    if ticket['status'] == 'ia' and first_user_message and len(messages) == 0:        
+        try:
+            start_ai_thread(first_user_message)
+            message_service.send_message(Message(first_user_message))
+            messages = message_service.show_messages(ticket_id)
+        except Exception as e:
+            print(f"Erro ao enviar primeira mensagem: {e}")
+            
     return render_template('chat.html', user=session['user'], ticket=ticket, messages=messages)
 
 @chat_bp.route('/send-msg', methods=['POST'])

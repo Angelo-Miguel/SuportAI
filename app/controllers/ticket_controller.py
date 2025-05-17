@@ -26,12 +26,11 @@ def new_ticket():
     
     # FIXME: # HACK dar um jeito de colocar isso no chat controller
     # Primeira msg do usuario
-    user_message = Message({
+    session['first_user_message'] ={
         'message': request.form.get('description'),
         'user_id': session['user']['id'],
         'ticket_id': ticket_id
-    })
-    message_service.send_message(user_message)
+    }
       
     return redirect(url_for('chat.chat',ticket_id = ticket_id))
 

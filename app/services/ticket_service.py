@@ -37,7 +37,7 @@ class TicketService():
             conn.commit()
             
             # Recupera o ID do último ticket inserido
-            cursor.execute('SELECT LAST_INSERT_ID() AS id')
+            cursor.execute('SELECT LAST_INSERT_ID()')
             result = cursor.fetchone()
             if result:
                 ticket_id = result['LAST_INSERT_ID()'] # type: ignore  #HACK: ERROR: No overloads for "__getitem__" match the provided arguments
