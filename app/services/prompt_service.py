@@ -1,4 +1,5 @@
 # app/service/prompt_service.py
+# FIXME: melhorar esses prompts
 
 class PromptBuilder:
     TRANSFER_TRIGGER_PHRASE = "estou transferindo seu atendimento para um agente humano"
