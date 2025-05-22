@@ -24,7 +24,6 @@ def new_ticket():
     })
     ticket_id = ticket_service.new_ticket(ticket)
     
-    # FIXME: # HACK dar um jeito de colocar isso no chat controller
     # Primeira msg do usuario
     session['first_user_message'] ={
         'message': request.form.get('description'),

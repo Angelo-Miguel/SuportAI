@@ -56,13 +56,7 @@ class IaService:
         cursor = conn.cursor(dictionary=True)
 
         try:
-            query = """
-                SELECT message, role 
-                FROM messages 
-                INNER JOIN users ON messages.user_id = users.user_id 
-                WHERE ticket_id = %s 
-                ORDER BY sent_at ASC
-            """
+            query = "SELECT message, role FROM messages INNER JOIN users ON messages.user_id = users.user_id WHERE ticket_id = %s ORDER BY ASC"
             cursor.execute(query, (ticket_id,))
             results = cursor.fetchall()
 
