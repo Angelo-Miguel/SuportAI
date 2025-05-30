@@ -85,7 +85,7 @@
 						<span class="title">Título: {{ticket['title']}}</span>
 						<span class="category">Categoria: {{ticket['category']}}</span>
 						<span class="datetime">Data: {{ticket['created_at']}}</span>
-						<span class="status">
+						<span class="status" id="status">
 							Status:
 							<span class="{{ticket['status']}}">{{ticket['status']}}</span>
 						</span>
@@ -110,7 +110,7 @@
 
 						<!-- Técnico ou IA -->
 						<div class="mensage sender">
-							<div class="user-mensage">{{msg['name']}} ({{msg['role']}}):</div>
+							<div class="user-mensage">{{msg['name']}}:</div>
 							<p class="mensage-text">
 								{{msg['message']}}
 								<span class="inv">&nbsp &nbsp &nbsp &nbsp</span>
@@ -135,40 +135,77 @@
 						<span class="jinja"> {% endif %} {% endfor %} </span>
 					</div>
 					<div id="chat-bottom">
-						<form action="/send-msg" method="POST" id="form-mensage-input">
-							<input
-								type="text"
-								name="ticket_id"
-								value="{{ticket['id']}}"
-								hidden
-							/>
-							<input
-								type="text"
-								name="status"
-								value="{{ticket['status']}}"
-								hidden
-							/>
-							<input type="text" name="message" />
+						<form id="form-mensage-input">
+							<input type="text" name="message" id="message-input" />
 							<div id="icons">
 								<a href="">
 									<i class="fa-solid fa-paperclip"></i>
 								</a>
-								<a
-									href="#"
-									onclick="document.getElementById(`form-mensage-input`).submit();"
-								>
+								<button id="send-button">
 									<i class="fa-solid fa-paper-plane"></i>
-								</a>
+								</button>
 							</div>
 						</form>
 					</div>
 				</div>
 			</div>
 		</div>
-		
+
 		<!-- JavaScript -->
 		<script defer src="../static/js/scripts.js"></script>
 		<script defer src="../static/js/stars_script.js"></script>
 		<script defer src="../static/js/message_script.js"></script>
+		<script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
+		<script>
+			document.getElementById("send-button").addEventListener("click", (e) => {
+				e.preventDefault();
+			});
+
+
+			const socket = io();
+			const userId = "{{ session['user']['id'] }}";
+
+			document.getElementById("send-button").addEventListener("click", (e) => {
+				e.preventDefault();
+
+				const messageInput = document.getElementById("message-input");
+				if (!messageInput.value.trim()) return;
+
+				socket.emit("send_message", {
+					ticket_id: "{{ ticket['id'] }}",
+					user_id: userId,
+					status: "{{ ticket['status'] }}",
+					message: messageInput.value.trim(),
+				});
+
+				messageInput.value = "";
+			});
+
+			socket.on("new_message", (msg) => {
+				const messagesDiv = document.getElementById("messages");
+				const isReceiver = msg.user_id == userId;		
+
+				messagesDiv.innerHTML += `
+					<div class="mensage ${isReceiver ? "receiver" : "sender"}">
+						<div class="user-mensage">
+							${msg.name}:
+						</div>
+						<p class="mensage-text">
+							${msg.message}
+							<span class="inv">&nbsp &nbsp &nbsp &nbsp</span>
+							<span class="time-stamp">${msg.sent_at}</span>
+						</p>
+					</div>
+				`;
+
+				messagesDiv.scrollTop = messagesDiv.scrollHeight;
+			});
+
+			socket.on("change_status",(status) => {
+				const statusSpan = document.getElementById("status")
+				
+				statusSpan.innerHTML = status
+			})
+		</script>
 	</body>
 </html>

@@ -1,6 +1,8 @@
 from flask import Flask
 from dotenv import load_dotenv
 import os
+from app.extensions import socketio
+
 
 # Carrega variáveis de ambiente e forca override 
 load_dotenv(override=True)
@@ -9,21 +11,21 @@ def create_app():
     # Factory function para criar a instância do Flask
     app = Flask(__name__)
     
-    # Definindo onde estão os templates e arquivos estáticos.
+    # Configurações
     app.template_folder='app/templates'
     app.static_folder='app/static'
-    
-    # Configurações secret key e de debug
     app.secret_key = os.getenv('SECRET_KEY', 'fallback_secret_key')
-    app.debug = os.getenv('DEBUG', 'False').lower() in ('true', '1', 't') # DEBUG: Set False in production .env
+    app.debug = os.getenv('DEBUG', 'False').lower() in ('true', '1', 't')
     
-    # Importar e registrar blueprints
+    # Registrar blueprints
     register_blueprints(app)
+    
+    # Inicializar SocketIO com o app
+    socketio.init_app(app, cors_allowed_origins="*")
     
     return app
 
 def register_blueprints(app):
-    # Registra todos os blueprints da aplicação
     from app.controllers.auth_controller import auth_bp
     from app.controllers.user_controller import user_bp
     from app.controllers.ticket_controller import ticket_bp
@@ -36,7 +38,9 @@ def register_blueprints(app):
 
 if __name__ == '__main__':
     app = create_app()
-    app.run(
+    socketio.init_app(app)
+    socketio.run(
+        app,
         host=os.getenv('FLASK_HOST', '0.0.0.0'),
         port=int(os.getenv('FLASK_PORT', 5000))
     )
