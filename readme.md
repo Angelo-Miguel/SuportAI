@@ -93,4 +93,4 @@ Este projeto é uma aplicação web desenvolvida em Flask para gerenciamento de 
 ## Licença
 Este projeto é apenas para fins acadêmicos.
 
-Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE.md) para mais detalhes.
+Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE) para mais detalhes.
