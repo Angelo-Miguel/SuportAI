@@ -1,10 +1,8 @@
 # app/services/ai_service.py
-
 from app.services.openai_client import OpenAIClient
 from app.services.embedding_service import EmbeddingService
 from app.database.db_connection import MySQLConnection
 from app.services.prompt_service import PromptBuilder
-
 
 class IaService:
     def __init__(self):
