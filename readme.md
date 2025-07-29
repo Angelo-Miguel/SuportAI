@@ -15,22 +15,26 @@ Este projeto é uma aplicação web desenvolvida em Flask para gerenciamento de 
 - Avaliação do atendimento
 
 ## Estrutura do Projeto
-
-.\
-├── main.py\
-├── requirements.txt\
-├── .env\
-├── app/\
-│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    ├── controllers/        # Rotas e lógica de controle\
-│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    ├── database/           # Conexão e migrações do banco\
-│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    ├── models/             # Modelos de dados (ORM)\
-│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    ├── services/           # Regras de negócio, IA, helpers\
-│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    ├── static/             # Arquivos acessíveis publicamente\
-│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   ├── css/            # Estilos (style.css, reset.css, etc.)\
-│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   ├── font/           # Fontes personalizadas (.woff, .ttf, \etc.)\
-│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   ├── img/            # Imagens do projeto\
-│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   └── js/             # Scripts JS\
-│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    └── templates/          # Arquivos HTML renderizados (Jinja2)\
+```
+.
+├── main.py                # Ponto de entrada da aplicação
+├── app/                   # Código-fonte da aplicação
+│   ├── controllers/       # Controladores: definem rotas e lógica de requisições
+│   ├── database/          # Conexão, modelos e migrações do banco de dados
+│   ├── models/            # Definições das entidades e ORM
+│   ├── services/          # Lógica de negócio, integrações e utilitários (IA, etc.)
+│   ├── static/            # Arquivos estáticos acessíveis pelo navegador
+│   │   ├── css/           # Estilos CSS (style.css, reset.css, etc.)
+│   │   ├── font/          # Fontes personalizadas (.woff, .ttf, etc.)
+│   │   ├── img/           # Imagens da aplicação
+│   │   └── js/            # Scripts JavaScript
+│   └── templates/         # Templates HTML renderizados com Jinja2
+├── .gitignore             # Arquivos e pastas ignorados pelo Git
+├── LICENSE                # Licença do projeto
+├── readme.md              # Documentação do projeto
+├── .env                   # Variáveis de ambiente (configurações sensíveis)
+└── requirements.txt       # Lista de dependências do Python
+```
 
 ## Instalação
 
