@@ -1,3 +1,6 @@
+> [!WARNING]
+> Este repositório está em desenvolvimento ativo (Work in Progress). Mudanças frequentes podem ocorrer.
+
 # Suport AI - Sistema de Atendimento Técnico com IA
 Este projeto é uma aplicação web desenvolvida em Flask para gerenciamento de chamados técnicos, integrando uma Inteligência Artificial para triagem inicial e suporte ao usuário. O sistema permite cadastro, login, abertura de tickets, chat em tempo real via Socket.IO e transferência automática para agentes humanos quando necessário.
 
@@ -33,8 +36,8 @@ Este projeto é uma aplicação web desenvolvida em Flask para gerenciamento de 
 
 1. Clone o repositório:
       ```sh
-      git clone https://github.com/seu-usuario/Pim-Back-End.git
-      cd Pim-Back-End
+      git clone https://github.com/Angelo-Miguel/SuportAI.git
+      cd SuportAI
 
 2. Instale as dependências:
       ```sh
@@ -65,7 +68,29 @@ Este projeto é uma aplicação web desenvolvida em Flask para gerenciamento de 
 - OpenAI API
 - HTML, CSS, JavaScript
 
+## Colaboradores
+<table>
+  <tr>
+      <td align="center">
+      <a href="https://github.com/Angelo-Miguel" title="GitHub de Angelo Miguel Santa Rosa">
+        <img src="https://avatars.githubusercontent.com/u/127904294?v=4" width="100px;" alt="Foto do Angelo Miguel Santa Rosa no GitHub"/><br>
+        <sub>
+          <b>Angelo Miguel</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/Gustavo-Trento123" title="GitHub de Gustavo Natan Trento">
+        <img src="https://avatars.githubusercontent.com/u/127904295?v=4" width="100px;" alt="Foto do Gustavo Natan Trento no GitHub"/><br>
+        <sub>
+          <b>Gustavo Natan Trento</b>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>
+
 ## Licença
 Este projeto é apenas para fins acadêmicos.
 
-MIT License
+Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE.md) para mais detalhes.
