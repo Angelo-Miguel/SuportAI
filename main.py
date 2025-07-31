@@ -19,13 +19,12 @@ def register_blueprints(app):
     from app.controllers.user_controller import user_bp
     from app.controllers.ticket_controller import ticket_bp
     from app.controllers.chat_controller import chat_bp
-    from app.controllers.embedding_controller import document_bp
     
     app.register_blueprint(auth_bp)
     app.register_blueprint(user_bp)
     app.register_blueprint(ticket_bp)
     app.register_blueprint(chat_bp)
-    app.register_blueprint(document_bp)
+
     
 app = create_app()
 
