@@ -1,6 +1,6 @@
 # app/controllers/chat_controller.py
 from flask import Blueprint, render_template, session, redirect, url_for
-from app.extensions import socketio
+from flask_socketio import SocketIO
 from flask_socketio import emit
 from datetime import datetime
 import threading
@@ -14,6 +14,7 @@ chat_bp = Blueprint('chat', __name__)
 ticket_service = TicketService()
 message_service = MessageService()
 ia_service = IaService()
+socketio = SocketIO() 
 
 @chat_bp.route('/chat/<ticket_id>')
 def chat(ticket_id):
