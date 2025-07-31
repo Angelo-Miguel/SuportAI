@@ -1,8 +1,8 @@
-# app/services/ai_service.py
 from app.services.openai_client import OpenAIClient
 from app.services.embedding_service import EmbeddingService
 from app.database.db_connection import MySQLConnection
 from app.services.prompt_service import PromptBuilder
+import logging
 
 class IaService:
     def __init__(self):
@@ -11,61 +11,72 @@ class IaService:
         self.embedding_service = EmbeddingService()
 
     def chat_with_ai(self, prompt, ticket_id):
-        history, attempt_count = self.recovery_history(ticket_id)
-        system_prompt = self.prompt_builder.build(attempt_count)
+        try:
+            history, attempt_count = self.recover_history(ticket_id)
+            system_prompt = self.prompt_builder.build(attempt_count)
 
-        messages = [{"role": "system", "content": system_prompt}]
+            messages = [{"role": "system", "content": system_prompt}]
 
-        if history:
-            history.pop()
-            for msg in history:
-                role = "assistant" if msg["role"] == "ai" else msg["role"]
-                messages.append({"role": role, "content": msg["content"]}) #type: ignore #HACK
+            if history:
+                # Remove a última mensagem se necessário (ajuste conforme sua lógica)
+                history = history[:-1]
+                for msg in history:
+                    role = "assistant" if msg["role"] == "ai" else msg["role"]
+                    messages.append({"role": role, "content": msg["content"]})
 
-        relevant_docs = self.embedding_service.get_relevant_chunks(prompt)
-        if relevant_docs:
-            context_text = "\n".join(relevant_docs)
-            messages.append({
-                "role": "system",
-                "content": f"Contexto adicional baseado em documentos anteriores:\n{context_text}"
-            })
+            # Adiciona contexto relevante baseado em embeddings
+            relevant_docs = self.embedding_service.get_relevant_chunks(prompt)
+            if relevant_docs:
+                context_text = "\n".join(relevant_docs)
+                messages.append({
+                    "role": "system",
+                    "content": f"Contexto adicional baseado em documentos anteriores:\n{context_text}"
+                })
 
-        messages.append({"role": "user", "content": prompt})
+            messages.append({"role": "user", "content": prompt})
 
-        print("Mensagens para IA:", messages)  # DEBUG
+            logging.debug(f"Mensagens enviadas para IA: {messages}")
 
-        response = self.ai_client.chat(messages)
-        response_text = response.choices[0].message.content
+            response = self.ai_client.chat(messages)
+            response_text = response.choices[0].message.content.strip()
 
-        print("Resposta da IA:", response_text)  # DEBUG
+            logging.debug(f"Resposta da IA: {response_text}")
 
-        should_transfer = (
-            PromptBuilder.TRANSFER_TRIGGER_PHRASE in response_text.lower() #type: ignore #HACK
-        )
+            should_transfer = (
+                PromptBuilder.TRANSFER_TRIGGER_PHRASE in response_text.lower()
+            )
 
-        print("Tentativas:", attempt_count)
-        print("Transferir para humano?", should_transfer)
+            logging.info(f"Tentativas: {attempt_count} | Transferir para humano? {should_transfer}")
 
-        return response_text, should_transfer
+            return response_text, should_transfer
+
+        except Exception as e:
+            logging.error(f"Erro no chat_with_ai: {e}")
+            return "Desculpe, ocorreu um erro ao processar sua solicitação.", False
 
     @staticmethod
-    def recovery_history(ticket_id):
+    def recover_history(ticket_id):
         conn = MySQLConnection().get_connection()
         cursor = conn.cursor(dictionary=True)
-
         try:
-            query = "SELECT message, role FROM messages INNER JOIN users ON messages.user_id = users.user_id WHERE ticket_id = %s ORDER BY sent_at ASC"
+            query = """
+                SELECT message, role 
+                FROM messages 
+                INNER JOIN users ON messages.user_id = users.user_id 
+                WHERE ticket_id = %s 
+                ORDER BY sent_at ASC
+            """
             cursor.execute(query, (ticket_id,))
             results = cursor.fetchall()
 
             if not results:
-                return None, 0
+                return [], 0
 
-            attempt_count = sum(1 for row in results if row["role"] == "ai") #type: ignore #HACK
+            attempt_count = sum(1 for row in results if row["role"] == "ai")
             formatted_results = [
                 {
-                    "role": "assistant" if row["role"] == "ai" else row["role"], #type: ignore #HACK
-                    "content": row["message"] #type: ignore #HACK
+                    "role": "assistant" if row["role"] == "ai" else row["role"],
+                    "content": row["message"]
                 }
                 for row in results
             ]
@@ -73,9 +84,8 @@ class IaService:
             return formatted_results, attempt_count
 
         except Exception as e:
-            print("Erro ao recuperar histórico:", e)
-            raise
-
+            logging.error(f"Erro ao recuperar histórico: {e}")
+            return [], 0
         finally:
             cursor.close()
             conn.close()
