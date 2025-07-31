@@ -1,14 +1,15 @@
 # app/services/openai_client.py
-import os
+from app.config import Config
 from openai import OpenAI
+
 
 class OpenAIClient:
     def __init__(self):
-        self.client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+        self.client = OpenAI(api_key=Config.OPENAI_API_KEY)
 
-    def chat(self, messages, model="gpt-4o-mini", temperature=0.7):
+    def chat(
+        self, messages, model=Config.OPENAI_MODEL, temperature=Config.OPENAI_TEMPERATURE
+    ):
         return self.client.chat.completions.create(
-            model=model,
-            messages=messages,
-            temperature=temperature
+            model=model, messages=messages, temperature=temperature
         )
