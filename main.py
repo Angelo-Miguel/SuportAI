@@ -1,28 +1,18 @@
 from flask import Flask
 from dotenv import load_dotenv
-import os
 from app.extensions import socketio
-
+from app.config import Config
 
 # Carrega variáveis de ambiente e forca override 
 load_dotenv(override=True)
 
 def create_app():
     # Factory function para criar a instância do Flask
-    app = Flask(__name__)
-    
-    # Configurações
-    app.template_folder='app/templates'
-    app.static_folder='app/static'
-    app.secret_key = os.getenv('SECRET_KEY', 'fallback_secret_key')
-    app.debug = os.getenv('DEBUG', 'False').lower() in ('true', '1', 't')
+    app = Flask(__name__, template_folder=Config.TEMPLATE_FOLDER, static_folder=Config.STATIC_FOLDER)
+    app.config.from_object(Config)
     
     # Registrar blueprints
     register_blueprints(app)
-    
-    # Inicializar SocketIO com o app
-    socketio.init_app(app, cors_allowed_origins="*")
-    
     return app
 
 def register_blueprints(app):
@@ -36,11 +26,11 @@ def register_blueprints(app):
     app.register_blueprint(ticket_bp)
     app.register_blueprint(chat_bp)
 
+app = create_app()
+
 if __name__ == '__main__':
-    app = create_app()
-    socketio.init_app(app)
     socketio.run(
         app,
-        host=os.getenv('FLASK_HOST', '0.0.0.0'),
-        port=int(os.getenv('FLASK_PORT', 5000))
+        host=app.config['FLASK_HOST'],
+        port=app.config['FLASK_PORT']
     )
