@@ -83,11 +83,15 @@
 					<!-- FIXME: Melhorar o css e html das info -->
 					<div id="info">
 						<span class="title">Título: {{ticket['title']}}</span>
-						<span class="category">Categoria: {{ticket['category']}}</span>
+						<span class="category"
+							>Categoria: {{ticket['category']}}</span
+						>
 						<span class="datetime">Data: {{ticket['created_at']}}</span>
 						<span class="status" id="status">
 							Status:
-							<span class="{{ticket['status']}}">{{ticket['status']}}</span>
+							<span class="{{ticket['status']}}"
+								>{{ticket['status']}}</span
+							>
 						</span>
 					</div>
 					<form action="/exit" method="POST">
@@ -157,33 +161,36 @@
 		<script defer src="../static/js/message_script.js"></script>
 		<script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
 		<script>
-			document.getElementById("send-button").addEventListener("click", (e) => {
-				e.preventDefault();
-			});
-
+			document
+				.getElementById("send-button")
+				.addEventListener("click", (e) => {
+					e.preventDefault();
+				});
 
 			const socket = io();
 			const userId = "{{ session['user']['id'] }}";
 
-			document.getElementById("send-button").addEventListener("click", (e) => {
-				e.preventDefault();
+			document
+				.getElementById("send-button")
+				.addEventListener("click", (e) => {
+					e.preventDefault();
 
-				const messageInput = document.getElementById("message-input");
-				if (!messageInput.value.trim()) return;
+					const messageInput = document.getElementById("message-input");
+					if (!messageInput.value.trim()) return;
 
-				socket.emit("send_message", {
-					ticket_id: "{{ ticket['id'] }}",
-					user_id: userId,
-					status: "{{ ticket['status'] }}",
-					message: messageInput.value.trim(),
+					socket.emit("send_message", {
+						ticket_id: "{{ ticket['id'] }}",
+						user_id: userId,
+						status: "{{ ticket['status'] }}",
+						message: messageInput.value.trim(),
+					});
+
+					messageInput.value = "";
 				});
-
-				messageInput.value = "";
-			});
 
 			socket.on("new_message", (msg) => {
 				const messagesDiv = document.getElementById("messages");
-				const isReceiver = msg.user_id == userId;		
+				const isReceiver = msg.user_id == userId;
 
 				messagesDiv.innerHTML += `
 					<div class="mensage ${isReceiver ? "receiver" : "sender"}">
@@ -201,11 +208,11 @@
 				messagesDiv.scrollTop = messagesDiv.scrollHeight;
 			});
 
-			socket.on("change_status",(status) => {
-				const statusSpan = document.getElementById("status")
-				
-				statusSpan.innerHTML = status
-			})
+			socket.on("change_status", (status) => {
+				const statusSpan = document.getElementById("status");
+
+				statusSpan.innerHTML = status;
+			});
 		</script>
 	</body>
 </html>

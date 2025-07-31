@@ -1,6 +1,7 @@
 # app/service/prompt_service.py
 # FIXME: melhorar esses prompts
 
+
 class PromptBuilder:
     TRANSFER_TRIGGER_PHRASE = "estou transferindo seu atendimento para um agente humano"
 
@@ -31,9 +32,7 @@ class PromptBuilder:
             "**'A partir deste momento, estou transferindo seu atendimento para um agente humano.'**"
         )
 
-        self.reminder = (
-            "Lembre-se: ao identificar 3 tentativas, problema complexo ou usuário leigo, transfira o atendimento."
-        )
+        self.reminder = "Lembre-se: ao identificar 3 tentativas, problema complexo ou usuário leigo, transfira o atendimento."
 
     def build(self, attempt_count):
         prompt = self.base

@@ -67,8 +67,8 @@
 				<input type="submit" value="Entrar" class="button" />
 			</div>
 			<span class="jinja">
-				{% for category, message in get_flashed_messages(with_categories=True)
-				%}
+				{% for category, message in
+				get_flashed_messages(with_categories=True) %}
 				<div class="login-alert alert-{{ category }}">{{ message }}</div>
 				{% endfor %}
 			</span>

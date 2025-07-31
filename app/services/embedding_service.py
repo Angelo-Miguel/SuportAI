@@ -4,6 +4,7 @@ import json
 from app.services.openai_client import OpenAIClient
 from app.database.db_connection import MySQLConnection
 
+
 class EmbeddingService:
     def __init__(self):
         self.client = OpenAIClient().client
@@ -15,7 +16,7 @@ class EmbeddingService:
         try:
             cursor.execute(
                 "INSERT INTO document_embeddings (document_id, content, embedding) VALUES (%s, %s, %s)",
-                (document_id, content, json.dumps(embedding))
+                (document_id, content, json.dumps(embedding)),
             )
             conn.commit()
         except Exception as e:
@@ -28,7 +29,9 @@ class EmbeddingService:
         conn = self.db.get_connection()
         cursor = conn.cursor(dictionary=True)
         try:
-            cursor.execute("SELECT document_id, content, embedding FROM document_embeddings")
+            cursor.execute(
+                "SELECT document_id, content, embedding FROM document_embeddings"
+            )
             results = cursor.fetchall()
             documents = []
             embeddings = []
@@ -46,8 +49,7 @@ class EmbeddingService:
     def generate_and_store_embedding(self, document_id, content):
         try:
             response = self.client.embeddings.create(
-                model="text-embedding-3-small",
-                input=[content]
+                model="text-embedding-3-small", input=[content]
             )
             if response.data:
                 embedding = response.data[0].embedding
@@ -63,11 +65,12 @@ class EmbeddingService:
                 return []
 
             response = self.client.embeddings.create(
-                model="text-embedding-3-small",
-                input=[user_input]
+                model="text-embedding-3-small", input=[user_input]
             )
             if not response.data:
-                logging.warning("Nenhum embedding retornado para a consulta do usuário.")
+                logging.warning(
+                    "Nenhum embedding retornado para a consulta do usuário."
+                )
                 return []
 
             query_embedding = response.data[0].embedding

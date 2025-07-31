@@ -141,16 +141,25 @@
 						<tbody class="tbody">
 							<span class="jinja"> {% for table_item in tickets%} </span>
 							<tr>
-								<td><span class="jinja">{{table_item['ticket_id']}}</span></td>
-								<td><span class="jinja">{{table_item['title']}}</span></td>
-								<td><span class="jinja">{{table_item['category']}}</span></td>
+								<td>
+									<span class="jinja"
+										>{{table_item['ticket_id']}}</span
+									>
+								</td>
+								<td>
+									<span class="jinja">{{table_item['title']}}</span>
+								</td>
+								<td>
+									<span class="jinja">{{table_item['category']}}</span>
+								</td>
 								<td class="{{table_item['status']}}">
 									<span class="jinja">
-										{% if table_item['status'] == 'ia' %} Triagem IA {% elif
-										table_item['status'] == 'open' %} Aberto {% elif
-										table_item['status'] == 'closed' %} Fechado {% elif
-										table_item['status'] == 'in-progress' %} Em Andamento {%
-										else %} {{table_item['status']}} {% endif %}	
+										{% if table_item['status'] == 'ia' %} Triagem IA
+										{% elif table_item['status'] == 'open' %} Aberto
+										{% elif table_item['status'] == 'closed' %}
+										Fechado {% elif table_item['status'] ==
+										'in-progress' %} Em Andamento {% else %}
+										{{table_item['status']}} {% endif %}
 									</span>
 								</td>
 								<td>
@@ -171,9 +180,10 @@
 											<span class="jinja">
 												{% if table_item['status'] == 'open' or
 												table_item['status'] == 'in-progress' or
-												table_item['status'] == 'ia' %} Abrir Chamado {% elif
-												table_item['status'] == 'closed' %} Reabrir Chamado {%
-												else %} {{ table_item['status'] }} {% endif %}
+												table_item['status'] == 'ia' %} Abrir
+												Chamado {% elif table_item['status'] ==
+												'closed' %} Reabrir Chamado {% else %} {{
+												table_item['status'] }} {% endif %}
 											</span>
 										</a>
 									</form>
@@ -190,7 +200,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<!-- JavaScript -->
 		<script defer src="../static/js/scripts.js"></script>
 	</body>

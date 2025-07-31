@@ -4,6 +4,7 @@ from app.database.db_connection import MySQLConnection
 from app.services.prompt_service import PromptBuilder
 import logging
 
+
 class IaService:
     def __init__(self):
         self.ai_client = OpenAIClient()
@@ -28,10 +29,12 @@ class IaService:
             relevant_docs = self.embedding_service.get_relevant_chunks(prompt)
             if relevant_docs:
                 context_text = "\n".join(relevant_docs)
-                messages.append({
-                    "role": "system",
-                    "content": f"Contexto adicional baseado em documentos anteriores:\n{context_text}"
-                })
+                messages.append(
+                    {
+                        "role": "system",
+                        "content": f"Contexto adicional baseado em documentos anteriores:\n{context_text}",
+                    }
+                )
 
             messages.append({"role": "user", "content": prompt})
 
@@ -46,7 +49,9 @@ class IaService:
                 PromptBuilder.TRANSFER_TRIGGER_PHRASE in response_text.lower()
             )
 
-            logging.info(f"Tentativas: {attempt_count} | Transferir para humano? {should_transfer}")
+            logging.info(
+                f"Tentativas: {attempt_count} | Transferir para humano? {should_transfer}"
+            )
 
             return response_text, should_transfer
 
@@ -76,7 +81,7 @@ class IaService:
             formatted_results = [
                 {
                     "role": "assistant" if row["role"] == "ai" else row["role"],
-                    "content": row["message"]
+                    "content": row["message"],
                 }
                 for row in results
             ]
