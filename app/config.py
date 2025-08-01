@@ -12,10 +12,12 @@ class Config:
     STATIC_FOLDER = "app/static"
     FLASK_HOST = os.getenv("FLASK_HOST", "0.0.0.0")
     FLASK_PORT = int(os.getenv("FLASK_PORT", 5000))
+
     # OPENAI
     OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
     OPENAI_MODEL = "gpt-4o-mini"
     OPENAI_TEMPERATURE = 0.7
+
     # DATABASE
     DATABASE_HOST = os.getenv("DATABASE_HOST", "localhost")
     DATABASE_PORT = os.getenv("DATABASE_PORT", "5000")

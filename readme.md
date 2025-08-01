@@ -28,7 +28,9 @@ Este projeto é uma aplicação web desenvolvida em Flask para gerenciamento de 
 │   │   ├── font/          # Fontes personalizadas (.woff, .ttf, etc.)
 │   │   ├── img/           # Imagens da aplicação
 │   │   └── js/            # Scripts JavaScript
-│   └── templates/         # Templates HTML renderizados com Jinja2
+│   ├── templates/         # Templates HTML renderizados com Jinja2
+│   ├── config.py          # Configuração do Sistema
+│   └── extensions.py      # Extensões do Sistema (SocketIO)
 ├── .gitignore             # Arquivos e pastas ignorados pelo Git
 ├── LICENSE                # Licença do projeto
 ├── readme.md              # Documentação do projeto
@@ -48,21 +50,32 @@ Este projeto é uma aplicação web desenvolvida em Flask para gerenciamento de 
       pip install -r requirements.txt
 
 3. Configure o arquivo .env com as variáveis do banco de dados e da OpenAI:
-      ```sh
-      HOST_DB=localhost
-      USER_DB=seu_usuario
-      PASSWORD_DB=sua_senha
-      PORT_DB=3306
-      DATABASE_DB=nome_do_banco
-      SECRET_KEY=sua_secret_key
-      OPENAI_API_KEY=sua_openai_key
-      FLASK_HOST=0.0.0.0
-      FLASK_PORT=5000
-      DEBUG=True
+    ```sh
+    #DATABASE
+    DATABASE_HOST=localhost
+    DATABASE_PORT=3306
+    DATABASE_USER=seu_usuario
+    DATABASE_PASSWORD=sua_senha
+    DATABASE_NAME=nome_do_banco
 
-4. Execute a aplicação:
+    #FLASK
+    FLASK_HOST=0.0.0.0
+    FLASK_PORT=5000
+    FLASK_DEBUG=1 # True or False
+    FLASK_SECRET_KEY = sua_chave_secreta
+
+    #OPENAI
+    OPENAI_API_KEY=sua_openai_key
+
+4. Configure o arquivo config.python
+    ```sh
+    # OPENAI
+    OPENAI_MODEL = "gpt-4o-mini"
+    OPENAI_TEMPERATURE = 0.7
+
+5. Execute a aplicação:
       ```sh
-      python [main.py](http://_vscodecontentref_/1)
+      python main.py
       
 ## Tecnologias Utilizadas
 - Python 3.11+
