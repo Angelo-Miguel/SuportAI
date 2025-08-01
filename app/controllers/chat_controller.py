@@ -1,6 +1,6 @@
 # app/controllers/chat_controller.py
 from flask import Blueprint, render_template, session, redirect, url_for
-from main import socketio
+from app.extensions import socketio
 from flask_socketio import emit
 from datetime import datetime
 from app.services.ticket_service import TicketService
@@ -81,7 +81,7 @@ def close_chat():
 
 
 # Evento SocketIO que trata o envio de novas mensagens do usuário
-@chat_bp.socketio.on("send_message")
+@socketio.on("send_message")
 def send_message(data):
     user_message = Message(
         {

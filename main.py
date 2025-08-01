@@ -1,8 +1,6 @@
 from flask import Flask
-from flask_socketio import SocketIO
+from app.extensions import socketio
 from app.config import Config
-
-socketio = SocketIO()
 
 
 def create_app():

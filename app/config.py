@@ -15,7 +15,7 @@ class Config:
     # OPENAI
     OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
     OPENAI_MODEL = "gpt-4o-mini"
-    OPENAI_TEMPERATURE = "0.7"
+    OPENAI_TEMPERATURE = 0.7
     # DATABASE
     DATABASE_HOST = os.getenv("DATABASE_HOST", "localhost")
     DATABASE_PORT = os.getenv("DATABASE_PORT", "5000")
