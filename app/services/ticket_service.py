@@ -7,7 +7,7 @@ class TicketService:
     def __init__(self):
         self.db = MySQLConnection()
 
-    def show_tickets(self, user_id):
+    def get_tickets_by_user_id(self, user_id):
         conn = self.db.get_connection()
         cursor = conn.cursor(dictionary=True)
 

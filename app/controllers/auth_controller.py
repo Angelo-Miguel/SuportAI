@@ -38,6 +38,7 @@ def auth():
         }
         return redirect(url_for("user.dashboard"))
     else:
+        flash("Usuário ou senha incorretos!", "danger")
         return redirect(url_for("auth.login_page"))
 
 

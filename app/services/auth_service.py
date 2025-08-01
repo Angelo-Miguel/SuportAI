@@ -1,7 +1,6 @@
 # app/services/auth_service.py
 from app.models.user import User
 from app.database.db_connection import MySQLConnection
-from flask import flash
 import hashlib
 
 
@@ -30,12 +29,10 @@ class AuthService:
             if user_data:
                 return User(user_data)
             else:
-                flash("Usuário ou senha incorretos!", "danger")
                 return None
 
         except Exception as e:
             print(f"Erro ao autenticar: {str(e)}")
-            flash("Erro durante o login", "danger")
             return None
         finally:
             conn.close()
