@@ -130,6 +130,7 @@
 		& #brand {
 			display: flex;
 			align-items: center;
+			width: 30%;
 
 			& #logo {
 				width: auto;
@@ -148,9 +149,9 @@
 		& #user-actions {
 			display: flex;
 			align-items: center;
-			justify-content: space-between;
+			justify-content: right;
 			position: relative;
-			width: 50%;
+			width: 70%;
 
 			& .new-request {
 				width: 13vw;
